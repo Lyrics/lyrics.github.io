@@ -705,6 +705,10 @@ h6:before {
   color: #9ddcff;
 }
 
+#content {
+    white-space: pre;
+}
+
 p {
   margin-bottom: 20px;
 }
