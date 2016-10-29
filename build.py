@@ -2,20 +2,28 @@
 
 import os
 
+siteName = 'Lyrics'
 srcDir = 'lyrics/database'
 destDir = 'db'
 
-HTMLheader = '<!doctype html><meta charset="utf-8"/><title>'
-HTMLhedend = '</title><div>'
-HTMLfooter = '</div>'
+HTMLheader = open( 'partials/header_start.htm', 'r' ).read().strip()
+HTMLhedend = open( 'partials/header_end.htm', 'r' ).read().strip()
+HTMLfooter = open( 'partials/footer.htm', 'r' ).read()
 
-def simplifyPath( string ):
-    return string.replace( ' ', '-' ).lower()
+def simplifyPath( s ):
+    return s.replace( ' ', '-' ).lower()
 
-def createIndex( path ):
-    f = open( os.path.join( path, 'index.htm' ), 'w+' )
-    f.write( HTMLheader + HTMLhedend )
-    return f
+def createIndex( path, title ):
+    indexFile = open( os.path.join( path, 'index.htm' ), 'w' )
+    indexFile.write( HTMLheader + title + HTMLhedend )
+    return indexFile
+
+def anchor( target, content ):
+    return '<a href="/' + target + '">' + content + '</a>'
+
+main = createIndex( '', siteName )
+main.write( "Welcome!" )
+main.write( HTMLfooter )
 
 for letter in os.listdir( srcDir ):
     letterPath = os.path.join( srcDir, letter )
@@ -26,7 +34,7 @@ for letter in os.listdir( srcDir ):
         # Create db/x/
         os.mkdir( simplifiedLetterPath )
         # Create db/x/index.htm
-        letterPathFile = createIndex( simplifiedLetterPath )
+        letterPathFile = createIndex( simplifiedLetterPath, " | " + siteName )
         for artist in os.listdir( letterPath ):
             artistPath = os.path.join( letterPath, artist )
             if not os.path.isdir( artistPath ):
@@ -34,11 +42,11 @@ for letter in os.listdir( srcDir ):
             else:
                 simplifiedArtistPath = simplifyPath( os.path.join( destDir, letter, artist ) )
                 # Append artist link to db/x/index.htm
-                letterPathFile.write( artist )
+                letterPathFile.write( anchor( simplifiedArtistPath, artist ) )
                 # Create db/x/artist/
                 os.mkdir( simplifiedArtistPath )
                 # Create db/x/artist/index.htm
-                artistPathFile = createIndex( simplifiedArtistPath )
+                artistPathFile = createIndex( simplifiedArtistPath, " | " + siteName )
                 for album in os.listdir( artistPath ):
                     albumPath = os.path.join( artistPath, album )
                     if not os.path.isdir( albumPath ):
@@ -46,22 +54,30 @@ for letter in os.listdir( srcDir ):
                     else:
                         simplifiedAlbumPath = simplifyPath( os.path.join( destDir, letter, artist, album ) )
                         # Append album link to db/x/artist/index.htm
-                        artistPathFile.write( album )
+                        artistPathFile.write( anchor( simplifiedAlbumPath, album ) )
                         # Create db/x/artist/album/
                         os.mkdir( simplifiedAlbumPath )
-                        # create db/x/artist/album/index.htm
-                        albumPathFile = createIndex( simplifiedAlbumPath )
+                        # Create db/x/artist/album/index.htm
+                        albumPathFile = createIndex( simplifiedAlbumPath, " | " + siteName )
                         for song in os.listdir( albumPath ):
                             songPath = os.path.join( albumPath, song )
                             if not os.path.isfile( songPath ):
                                 print songPath + " is not a file!"
                             else:
+                                lyrics = open( songPath, 'r' ).read()
                                 simplifiedSongPath = simplifyPath( os.path.join( destDir, letter, artist, album, song ) )
                                 # Append song link to db/x/artist/album/index.htm
-                                albumPathFile.write( song )
+                                albumPathFile.write( anchor( simplifiedSongPath, song ) )
                                 # Create db/x/artist/album/song/
                                 os.mkdir( simplifiedSongPath )
                                 # Create db/x/artist/album/song/index.htm
-                                songPathFile = createIndex( simplifiedSongPath )
-                                # populate it with the song's contents
+                                songPathFile = createIndex( simplifiedSongPath, " | " + siteName )
+                                # Also create a plaintext file
+                                txt = open( simplifiedSongPath + '.txt', 'w' )
+                                # Populate them with lyrics
+                                txt.write( lyrics )
+                                songPathFile.write( '<pre>' + lyrics + '</pre>' )
+                                songPathFile.write( HTMLfooter )
+                        albumPathFile.write( HTMLfooter )
+                artistPathFile.write( HTMLfooter )
         letterPathFile.write( HTMLfooter )
