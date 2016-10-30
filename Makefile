@@ -4,11 +4,10 @@ update:
 	git submodule update --recursive --remote
 
 clean:
-	rm -f index.htm
-	rm -rf db || git rm -rf db
+	rm -rf static || git rm -rf static
 
 build:
-	mkdir -p db
+	mkdir -p static/db
 	python build.py
 
 pull:

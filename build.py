@@ -4,7 +4,7 @@ import os
 
 siteName = 'Lyrics'
 srcDir = 'lyrics/database'
-destDir = 'db'
+destDir = 'static/db'
 
 HTMLheader = open( 'partials/header_start.htm', 'r' ).read().strip()
 HTMLhedend = open( 'partials/header_end.htm', 'r' ).read().strip()
