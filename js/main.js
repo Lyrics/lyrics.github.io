@@ -2,7 +2,9 @@
 
 
 var baseURL = 'https://api.github.com/repos/Lyrics/lyrics/contents/database/'
+var searchBaseURL = 'https://api.github.com/search/code?q=repo:Lyrics/lyrics path:database/ fork:false '
 var debounceTime = 1000;
+var dbPrefix = '/db';
 
 
 /* API */
@@ -43,7 +45,7 @@ function APIsearch (query, cb) {
     if (query.length < 3) {
         cb(new Error("Query too short"))
     } else {
-        Vue.http.get('https://api.github.com/search/code?q=repo:Lyrics/lyrics path:database/ fork:false ' + query)
+        Vue.http.get(searchBaseURL + query)
             .then(function (response) {
                 cb(null, response.body.items)
             },
@@ -72,7 +74,7 @@ function updateBreadcrumbs(route) {
     for (var pname in route.params) {
         if (!route.params[pname]) continue;
 
-        var path = ('/db/' + usedParams.join('/') + '/' + route.params[pname]).replace(/\/+/g, '/')
+        var path = (dbPrefix + '/' + usedParams.join('/') + '/' + route.params[pname]).replace(/\/+/g, '/')
         Vue.set(breadcrumbsData, i++, { path: path, name: route.params[pname] })
         usedParams.push(route.params[pname])
     }
@@ -93,21 +95,21 @@ const Home = {
 /* /db/:letter/:artist/:album */
 
 const Path = {
-    data () {
+    data: function () {
         return {
             loading: false,
             items: null,
             error: null
         }
     },
-    created () {
+    created: function () {
         this.fetchData()
     },
     watch: {
         '$route': 'fetchData'
     },
     methods: {
-        fetchData () {
+        fetchData: function () {
             this.error = this.items = null
             this.loading = true
 
@@ -141,38 +143,38 @@ const Path = {
             })
         }
     },
-    template: `<div class="path">
-                <div class="loading" v-if="loading">Loading…</div>
-                <div v-if="error" class="error">{{ error }}</div>
-                <transition name="slide">
-                 <div v-if="items" class="content">
-                  <ul id="ls">
-                   <li v-for="item in items"><router-link :to="{ path: item.name }" append>{{ item.name }}</a></li>
-                  </ul>
-                 </div>
-                </transition>
-                </div>`
+    template: '<div class="path">' +
+                '<div class="loading" v-if="loading">Loading…</div>' +
+                '<div v-if="error" class="error">{{ error }}</div>' +
+                '<transition name="slide">' +
+                 '<div v-if="items" class="content">' +
+                  '<ul id="ls">' +
+                   '<li v-for="item in items"><router-link :to="{ path: item.name }" append>{{ item.name }}</a></li>' +
+                  '</ul>' +
+                 '</div>' +
+                '</transition>' +
+                '</div>'
 }
 
 
 /* /db/:letter/:artist/:album/:song */
 
 const File = {
-    data () {
+    data: function () {
         return {
             loading: false,
             text: null,
             error: null
         }
     },
-    created () {
+    created: function () {
         this.fetchData()
     },
     watch: {
         '$route': 'fetchData'
     },
     methods: {
-        fetchData () {
+        fetchData: function () {
             this.error = this.text = null
             this.loading = true
 
@@ -196,24 +198,24 @@ const File = {
             })
         }
     },
-    template: `<div class="file">
-                 <div class="loading" v-if="loading">Loading…</div>
-                 <div v-if="error" class="error">{{ error }}</div>
-                 <transition name="slide">
-                  <div v-if="text" class="content"><pre>{{ text }}</pre></div>
-                 </transition>
-               </div>`
+    template: '<div class="file">' +
+                 '<div class="loading" v-if="loading">Loading…</div>' +
+                 '<div v-if="error" class="error">{{ error }}</div>' +
+                 '<transition name="slide">' +
+                  '<div v-if="text" class="content"><pre>{{ text }}</pre></div>' +
+                 '</transition>' +
+               '</div>'
 }
 
 
 Vue.component('search-query', {
-    data () {
+    data: function () {
         return {
             query: '',
         }
     },
     methods: {
-        find () {
+        find: function () {
             if (this.query.length) {
                 this.$router.push('/search/' + this.query)
             }
@@ -223,14 +225,14 @@ Vue.component('search-query', {
 })
 
 const Search = {
-    data () {
+    data: function () {
         return {
             loading: false,
             items: null,
             error: null
         }
     },
-    created () {
+    created: function () {
         document.title = 'Search | Lyrics'
         updateBreadcrumbs()
         this.fetchData()
@@ -254,17 +256,17 @@ const Search = {
             })
         }, debounceTime)
     },
-    template: `<div class="search">
-                <div class="loading" v-if="loading">Loading…</div>
-                <div v-if="error" class="error">{{ error }}</div>
-                <transition name="slide">
-                 <div v-if="items" class="content">
-                  <ul id="ls">
-                   <li v-for="item in items"><router-link :to="{ path: '/db' + item.path.substring(8) }">{{ item.name }}</a></li>
-                  </ul>
-                 </div>
-                </transition>
-                </div>`
+    template: '<div class="search">' +
+                '<div class="loading" v-if="loading">Loading…</div>' +
+                '<div v-if="error" class="error">{{ error }}</div>' +
+                '<transition name="slide">' +
+                 '<div v-if="items" class="content">' +
+                  '<ul id="ls">' +
+                   '<li v-for="item in items"><router-link :to="{ path: dbPrefix + item.path.substring(8) }">{{ item.name }}</a></li>' +
+                  '</ul>' +
+                 '</div>' +
+                '</transition>' +
+                '</div>'
 }
 
 
@@ -280,11 +282,11 @@ const router = new VueRouter({
             component: Home
         },
         {
-            path: '/db/:letter/:artist?/:album?',
+            path: dbPrefix + '/:letter/:artist?/:album?',
             component: Path
         },
         {
-            path: '/db/:letter/:artist/:album/:song',
+            path: dbPrefix + '/:letter/:artist/:album/:song',
             component: File
         },
         {

@@ -1,9 +1,9 @@
 body {
-    color: transparent;
+    color: #111;
     margin: 0;
     font-family: Lato, Verdana, Arial;
     font-size: 14px;
-    background: #FAFAFA url(../images/body-bg.jpg);
+    background: #FAFAFA url(../i/bg.jpg);
 }
 
 ul {
@@ -127,6 +127,7 @@ pre {
 .view {
     color: #222;
 }
+
 
 /*
  * Agenda: center the lyrics sheet
