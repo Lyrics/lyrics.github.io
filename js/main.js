@@ -117,7 +117,7 @@ var Path = {
                 this.$route.params.letter,
                 this.$route.params.artist,
                 this.$route.params.album
-            ].join('/').replace(/\/*$/, ''), (err, items) => {
+            ].join('/').replace(/\/*$/, ''), function (err, items) {
                 this.loading = false
 
                 if (err) {
@@ -140,7 +140,7 @@ var Path = {
                 document.title = title.join(' | ')
 
                 updateBreadcrumbs(this.$route)
-            })
+            }.bind(this))
         }
     },
     template: '<div class="path">' +
@@ -183,7 +183,7 @@ var File = {
                 this.$route.params.artist,
                 this.$route.params.album,
                 this.$route.params.song
-            ].join('/').replace(/\/*$/, ''), (err, text) => {
+            ].join('/').replace(/\/*$/, ''), function (err, text) {
                 this.loading = false
 
                 if (err) {
@@ -195,7 +195,7 @@ var File = {
                 document.title = this.$route.params.song + ' – ' + this.$route.params.artist + ' |  Lyrics'
 
                 updateBreadcrumbs(this.$route)
-            })
+            }.bind(this))
         }
     },
     template: '<div class="file">' +
@@ -245,7 +245,7 @@ var Search = {
             this.error = this.items = null
             this.loading = true
 
-            APIsearch(this.$route.params.query, (err, items) => {
+            APIsearch(this.$route.params.query, function (err, items) {
                 this.loading = false
 
                 if (err) {
@@ -253,7 +253,7 @@ var Search = {
                 } else {
                     this.items = items
                 }
-            })
+            }.bind(this))
         }, debounceTime)
     },
     template: '<div class="search">' +
