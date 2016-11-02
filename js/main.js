@@ -192,7 +192,7 @@ var File = {
                     this.text = text
                 }
 
-                document.title = this.$route.params.song + ' – ' + this.$route.params.artist + ' |  Lyrics'
+                document.title = this.$route.params.artist + ' – ' + this.$route.params.song + ' |  Lyrics'
 
                 updateBreadcrumbs(this.$route)
             }.bind(this))
@@ -253,6 +253,7 @@ var Search = {
                 } else {
                     this.items = items
                 }
+                console.log(items)
             }.bind(this))
         }, debounceTime)
     },
@@ -262,7 +263,7 @@ var Search = {
                 '<transition name="slide">' +
                  '<div v-if="items" class="content">' +
                   '<ul id="ls">' +
-                   '<li v-for="item in items"><router-link :to="{ path: dbPrefix + item.path.substring(8) }">{{ item.name }}</a></li>' +
+                   '<li v-for="item in items"><router-link :to="{ path: dbPrefix + item.path.substring(8) }">{{ item.path.split("/")[2] }} – {{ item.name }}</a></li>' +
                   '</ul>' +
                  '</div>' +
                 '</transition>' +
