@@ -276,6 +276,7 @@ var Search = {
 Vue.use(VueRouter)
 
 var router = new VueRouter({
+    mode: 'history',
     linkActiveClass: 'active',
     routes: [
         {
