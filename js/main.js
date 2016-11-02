@@ -19,7 +19,7 @@ function APIreadPath (path, cb) {
             }
         },
         function(response) {
-            const reason = response.status == 403 ? 'API rate limit exceeded, please wait a bit before trying again' : 'Something went wrong'
+            var reason = response.status == 403 ? 'API rate limit exceeded, please wait a bit before trying again' : 'Something went wrong'
             cb(new Error(reason))
         })
 }
@@ -36,7 +36,7 @@ function APIreadFile (path, cb) {
                 })
         },
         function(response) {
-            const reason = response.status == 403 ? 'API rate limit exceeded, please wait a bit before trying again' : 'Something went wrong'
+            var reason = response.status == 403 ? 'API rate limit exceeded, please wait a bit before trying again' : 'Something went wrong'
             cb(new Error(reason))
         })
 }
@@ -50,7 +50,7 @@ function APIsearch (query, cb) {
                 cb(null, response.body.items)
             },
             function (response) {
-                const reason = response.status == 403 ? 'Search API rate limit exceeded, please try searching again later' : 'Something went wrong'
+                var reason = response.status == 403 ? 'Search API rate limit exceeded, please try searching again later' : 'Something went wrong'
                 cb(new Error(reason))
             })
     }
@@ -83,7 +83,7 @@ function updateBreadcrumbs(route) {
 
 /* / */
 
-const Home = {
+var Home = {
     created: function () {
         document.title = 'Lyrics'
         updateBreadcrumbs()
@@ -94,7 +94,7 @@ const Home = {
 
 /* /db/:letter/:artist/:album */
 
-const Path = {
+var Path = {
     data: function () {
         return {
             loading: false,
@@ -159,7 +159,7 @@ const Path = {
 
 /* /db/:letter/:artist/:album/:song */
 
-const File = {
+var File = {
     data: function () {
         return {
             loading: false,
@@ -224,7 +224,7 @@ Vue.component('search-query', {
     template: '<input id="query" type="search" v-on:input="find" v-model="query" placeholder="Search" />'
 })
 
-const Search = {
+var Search = {
     data: function () {
         return {
             loading: false,
@@ -274,7 +274,7 @@ const Search = {
 
 Vue.use(VueRouter)
 
-const router = new VueRouter({
+var router = new VueRouter({
     linkActiveClass: 'active',
     routes: [
         {
