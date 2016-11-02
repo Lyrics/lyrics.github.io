@@ -1,2 +1,2 @@
 # lyrics.github.io
-Organization's website
+Web front-end to the lyrics database
