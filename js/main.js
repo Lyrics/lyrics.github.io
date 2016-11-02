@@ -7,6 +7,13 @@ var debounceTime = 1000;
 var dbPrefix = '/db';
 
 
+function escapeURLChars (input) {
+    console.log(input)
+    if (input)
+        return input.replace(/\?/g, '%3F');
+}
+
+
 /* API */
 
 function APIreadPath (path, cb) {
@@ -115,11 +122,11 @@ var Path = {
 
             APIreadPath([
                 this.$route.params.letter,
-                this.$route.params.artist,
-                this.$route.params.album
+                escapeURLChars(this.$route.params.artist),
+                escapeURLChars(this.$route.params.album)
             ].join('/').replace(/\/*$/, ''), function (err, items) {
                 this.loading = false
-
+console.log(items)
                 if (err) {
                     this.error = err.toString()
                 } else {
@@ -149,7 +156,7 @@ var Path = {
                 '<transition name="slide">' +
                  '<div v-if="items" class="content">' +
                   '<ul id="ls">' +
-                   '<li v-for="item in items"><router-link :to="{ path: item.name }" append>{{ item.name }}</a></li>' +
+                   '<li v-for="item in items"><router-link :to="{ path: escapeURLChars(item.name) }" append>{{ item.name }}</a></li>' +
                   '</ul>' +
                  '</div>' +
                 '</transition>' +
@@ -180,9 +187,9 @@ var File = {
 
             APIreadFile([
                 this.$route.params.letter,
-                this.$route.params.artist,
-                this.$route.params.album,
-                this.$route.params.song
+                escapeURLChars(this.$route.params.artist),
+                escapeURLChars(this.$route.params.album),
+                escapeURLChars(this.$route.params.song)
             ].join('/').replace(/\/*$/, ''), function (err, text) {
                 this.loading = false
 
