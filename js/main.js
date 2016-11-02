@@ -299,7 +299,8 @@ var router = new VueRouter({
 
 /* Initiate the framework */
 
-new Vue({router,
+new Vue({
+    router: router,
     data: function () {
         return {
             alphabet: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
