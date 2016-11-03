@@ -8,7 +8,6 @@ var dbPrefix = '/db';
 
 
 function escapeURLChars (input) {
-    console.log(input)
     if (input)
         return input.replace(/\?/g, '%3F');
 }
@@ -126,7 +125,7 @@ var Path = {
                 escapeURLChars(this.$route.params.album)
             ].join('/').replace(/\/*$/, ''), function (err, items) {
                 this.loading = false
-console.log(items)
+
                 if (err) {
                     this.error = err.toString()
                 } else {
@@ -260,7 +259,6 @@ var Search = {
                 } else {
                     this.items = items
                 }
-                console.log(items)
             }.bind(this))
         }, debounceTime)
     },
