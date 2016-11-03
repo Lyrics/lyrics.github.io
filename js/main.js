@@ -5,6 +5,7 @@ var baseURL = 'https://api.github.com/repos/Lyrics/lyrics/contents/database/'
 var searchBaseURL = 'https://api.github.com/search/code?q=repo:Lyrics/lyrics path:database/ fork:false '
 var debounceTime = 1000;
 var dbPrefix = '/db';
+var websiteName = document.title;
 
 
 function escapeURLChars (input) {
@@ -51,8 +52,8 @@ function APIsearch (query, cb) {
     if (query.length < 3) {
         cb(new Error("Query too short"))
     } else {
-        Vue.http.get(searchBaseURL + query)
-            .then(function (response) {
+        Vue.http.get(searchBaseURL + query).then(
+            function (response) {
                 cb(null, response.body.items)
             },
             function (response) {
@@ -91,7 +92,7 @@ function updateBreadcrumbs(route) {
 
 var Home = {
     created: function () {
-        document.title = 'Lyrics'
+        document.title = websiteName
         updateBreadcrumbs()
     },
     template: '<div>Please start by picking a letter or using the search field</div>'
@@ -141,7 +142,7 @@ var Path = {
                 if (this.$route.params.letter)
                     title.push(this.$route.params.letter)
 
-                title.push('Lyrics')
+                title.push(websiteName)
 
                 document.title = title.join(' | ')
 
@@ -198,7 +199,7 @@ var File = {
                     this.text = text
                 }
 
-                document.title = this.$route.params.artist + ' – ' + this.$route.params.song + ' |  Lyrics'
+                document.title = this.$route.params.artist + ' – ' + this.$route.params.song + ' | ' + websiteName
 
                 updateBreadcrumbs(this.$route)
             }.bind(this))
@@ -239,7 +240,7 @@ var Search = {
         }
     },
     created: function () {
-        document.title = 'Search | Lyrics'
+        document.title = 'Search | ' + websiteName
         updateBreadcrumbs()
         this.fetchData()
     },
@@ -281,7 +282,7 @@ var Search = {
 Vue.use(VueRouter)
 
 var router = new VueRouter({
-    mode: 'history',
+    mode: window.location.protocol == 'file:' ? 'hash' : 'history',
     linkActiveClass: 'active',
     routes: [
         {
@@ -308,10 +309,8 @@ var router = new VueRouter({
 
 new Vue({
     router: router,
-    data: function () {
-        return {
-            alphabet: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
-            breadcrumbs: breadcrumbsData
-        }
+    data: {
+        alphabet: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
+        breadcrumbs: breadcrumbsData
     }
 }).$mount('#app')
