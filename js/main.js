@@ -269,7 +269,7 @@ var Search = {
                 '<transition name="slide">' +
                  '<div v-if="items" class="content">' +
                   '<ul id="ls">' +
-                   '<li v-for="item in items"><router-link :to="{ path: dbPrefix + item.path.substring(8) }">{{ item.path.split("/")[2] }} – {{ item.name }}</a></li>' +
+                   '<li v-for="item in items"><router-link :to="{ path: dbPrefix + escapeURLChars(item.path.substring(8)) }">{{ item.path.split("/")[2] }} – {{ item.name }}</a></li>' +
                   '</ul>' +
                  '</div>' +
                 '</transition>' +
