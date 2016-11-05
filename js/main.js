@@ -3,65 +3,65 @@
 
 var baseURL = 'https://api.github.com/repos/Lyrics/lyrics/contents/database/'
 var searchBaseURL = 'https://api.github.com/search/code?q=repo:Lyrics/lyrics path:database/ fork:false '
-var debounceTime = 1000;
-var dbPrefix = '/db';
-var websiteName = document.title;
+var debounceTime = 1000
+var dbPrefix = '/db'
+var websiteName = document.title
 
 
 function escapeURLChars (input) {
     if (input)
-        return input.replace(/\?/g, '%3F');
+        return input.replace(/\?/g, '%3F')
 }
 
 
 /* API */
 
-function APIreadPath (path, cb) {
-    Vue.http.get(baseURL + path).then(
-        function(response) {
-            if (response.ok) {
-                cb(null, response.body)
-            } else {
-                cb(new Error('Empty directory'))
-            }
-        },
-        function(response) {
-            var reason = response.status == 403 ? 'API rate limit exceeded, please wait a bit before trying again' : 'Something went wrong'
-            cb(new Error(reason))
-        })
-}
-
-function APIreadFile (path, cb) {
-    Vue.http.get(baseURL + path).then(
-        function(response) {
-            Vue.http.get(response.body.download_url).then(
-                function (response) {
+var API = {
+    readPath: function (path, cb) {
+        Vue.http.get(baseURL + path).then(
+            function(response) {
+                if (response.ok) {
                     cb(null, response.body)
-                },
-                function (response) {
-                    cb(new Error("Something went wrong again"))
-                })
-        },
-        function(response) {
-            var reason = response.status == 403 ? 'API rate limit exceeded, please wait a bit before trying again' : 'Something went wrong'
-            cb(new Error(reason))
-        })
-}
-
-function APIsearch (query, cb) {
-    if (query.length < 3) {
-        cb(new Error("Query too short"))
-    } else {
-        Vue.http.get(searchBaseURL + query).then(
-            function (response) {
-                cb(null, response.body.items)
+                } else {
+                    cb(new Error('Empty directory'))
+                }
             },
-            function (response) {
-                var reason = response.status == 403 ? 'Search API rate limit exceeded, please try searching again later' : 'Something went wrong'
+            function(response) {
+                var reason = response.status == 403 ? 'API rate limit exceeded, please wait a bit before trying again' : 'Something went wrong'
                 cb(new Error(reason))
             })
+    },
+    readFile: function (path, cb) {
+        Vue.http.get(baseURL + path).then(
+            function(response) {
+                Vue.http.get(response.body.download_url).then(
+                    function (response) {
+                        cb(null, response.body)
+                    },
+                    function (response) {
+                        cb(new Error("Something went wrong again"))
+                    })
+            },
+            function(response) {
+                var reason = response.status == 403 ? 'API rate limit exceeded, please wait a bit before trying again' : 'Something went wrong'
+                cb(new Error(reason))
+            })
+    },
+    search: function (query, cb) {
+        if (query.length < 3) {
+            cb(new Error("Query too short"))
+        } else {
+            Vue.http.get(searchBaseURL + query).then(
+                function (response) {
+                    cb(null, response.body.items)
+                },
+                function (response) {
+                    var reason = response.status == 403 ? 'Search API rate limit exceeded, please try searching again later' : 'Something went wrong'
+                    cb(new Error(reason))
+                })
+        }
     }
-}
+};
 
 
 /* Breadcrumbs */
@@ -76,10 +76,10 @@ function updateBreadcrumbs(route) {
 
     if (!route) return;
 
-    var usedParams = [];
-    var i = 1;
+    var usedParams = []
+    var i = 1
     for (var pname in route.params) {
-        if (!route.params[pname]) continue;
+        if (!route.params[pname]) continue
 
         var path = (dbPrefix + '/' + usedParams.join('/') + '/' + route.params[pname]).replace(/\/+/g, '/')
         Vue.set(breadcrumbsData, i++, { path: path, name: route.params[pname] })
@@ -120,7 +120,7 @@ var Path = {
             this.error = this.items = null
             this.loading = true
 
-            APIreadPath([
+            API.readPath([
                 this.$route.params.letter,
                 escapeURLChars(this.$route.params.artist),
                 escapeURLChars(this.$route.params.album)
@@ -185,7 +185,7 @@ var File = {
             this.error = this.text = null
             this.loading = true
 
-            APIreadFile([
+            API.readFile([
                 this.$route.params.letter,
                 escapeURLChars(this.$route.params.artist),
                 escapeURLChars(this.$route.params.album),
@@ -252,7 +252,7 @@ var Search = {
             this.error = this.items = null
             this.loading = true
 
-            APIsearch(this.$route.params.query, function (err, items) {
+            API.search(this.$route.params.query, function (err, items) {
                 this.loading = false
 
                 if (err) {

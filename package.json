@@ -1,0 +1,11 @@
+{
+  "name": "lyrics.github.io",
+  "version": "1.0.0",
+  "local-web-server": {
+    "port": 8100,
+    "forbid": ["/.git", "/.gitignore"]
+  },
+  "scripts": {
+    "start": "ws --spa index.html"
+  }
+}
