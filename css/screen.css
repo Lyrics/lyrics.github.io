@@ -51,7 +51,7 @@ input {
     width: 160px;
     border-radius: 10px;
     outline: 0;
-    padding: 2px 4px;
+    padding: 2px 8px;
     border: none;
     margin: 4px;
 }
@@ -127,6 +127,29 @@ pre {
 
 .view {
     color: #222;
+}
+
+.view a {
+    color: #064dae;
+}
+
+
+/*
+ * Agenda: center the lyrics sheet
+ * to make it appear like a piece of paper on the screen
+ *
+ */
+
+#app {
+    display: none;
+}
+html.has-js #app {
+    display: block;
+}
+.js-error {
+    display: block;
+    margin: 3em;
+    text-align: center;
 }
 
 

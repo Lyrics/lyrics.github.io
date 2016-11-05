@@ -95,7 +95,11 @@ var Home = {
         document.title = websiteName
         updateBreadcrumbs()
     },
-    template: '<div>Please start by picking a letter or using the search field</div>'
+    template: '<div>' +
+                    '<p>This is a web interface to the <a href="https://github.com/Lyrics/lyrics">lyrics database hosted on github</a>.</p>' + 
+                    '<p>Please start by picking a letter or using the search field.</p>' +
+                    '<p>You can also <a href="https://github.com/Lyrics/lyrics/archive/master.zip">download the whole database as a single file</a>.' +
+                '</div>'
 }
 
 
