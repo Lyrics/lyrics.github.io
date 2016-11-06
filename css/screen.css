@@ -54,6 +54,7 @@ input {
     padding: 2px 8px;
     border: none;
     margin: 4px;
+    float: right;
 }
 
 nav,
@@ -130,7 +131,7 @@ pre {
 }
 
 p a {
-    color: #064dae;
+    text-decoration: underline;
 }
 
 
