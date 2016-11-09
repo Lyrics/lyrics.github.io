@@ -1,14 +1,26 @@
+*,
+*:before,
+*:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    height: 100%;
+}
+
 body {
     color: #111;
-    margin: 0;
+    min-height: 100%;
     font-family: Lato, Verdana, Arial;
     font-size: 14px;
     background: #FAFAFA url(../i/bg.jpg);
 }
 
 ul {
-    margin: 0;
-    padding: 0;
     list-style: none;
     line-height: 20px;
 }
@@ -26,6 +38,10 @@ a:hover {
     opacity: 1;
 }
 
+p {
+    margin-bottom: .5rem;
+}
+
 header {
     background: #333;
     height: 27px;
@@ -40,11 +56,14 @@ nav ul {
         nav a {
             color: #eee;
             font-size: 11px;
-            padding: 3px;
+            padding: 3px 8px;
             min-width: 19px;
-            height: 19px;
             display: inline-block;
             text-align: center;
+        }
+
+        nav li:first-child {
+            padding-right: 1rem;
         }
 
 input {
@@ -78,15 +97,13 @@ section,
     #breadcrumbs li:after {
         content: '→';
         color: rgba(0, 0, 0, .3);
+        padding: 0 2px;
     }
     #breadcrumbs li:last-child:after {
         content: none;
     }
         #breadcrumbs a {
-            padding: 0 2px;
-        }
-        #breadcrumbs li:first-child a {
-            padding-left: 0;
+            padding-right: 4px;
         }
 
 
@@ -193,4 +210,122 @@ body {
 #breadcrumbs li:first-child a,
 nav li:first-child a {
     padding-left: 0;
+}
+
+
+/*
+ * Agenda: show off-screen menu instead of navbar for smaller screens
+ *
+ */
+
+#nav-trigger,
+label {
+    display: none;
+}
+
+
+/* All Mobile Sizes (devices and browser) */
+@media only screen and (max-width: 1023px) {
+
+    #app {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+
+    .content {
+        position: relative;
+    }
+
+    nav,
+    section,
+    .content {
+        width: auto;
+    }
+
+    header {
+        position: fixed;
+        width: 100px;
+        height: 100%;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 2;
+        overflow-x: hidden;
+        overflow-y: auto;
+        right: -100px;
+        padding-bottom: 10rem;
+    }
+
+    nav {
+        width: 100%;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    nav li,
+    nav li:first-child {
+        display: block;
+        padding: .5rem 0;
+    }
+
+    nav a {
+        padding: 3px;
+    }
+
+    nav li:first-child a {
+        font-size: 130%;
+    }
+
+    input {
+        width: 88px;
+        float: none;
+        margin: .4rem auto;
+    }
+
+    section {
+        background: #FAFAFA;
+        padding: .5rem 1rem;
+    }
+
+    #nav-trigger {
+        display: inline-block;
+        position: fixed;
+        right: 1rem;
+        top: 1rem;
+        z-index: 2;
+        height: 30px;
+        width: 30px;
+        cursor: pointer;
+        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' x='0px' y='0px' width='30px' height='30px' viewBox='0 0 30 30' enable-background='new 0 0 30 30' xml:space='preserve'><rect width='30' height='6'/><rect y='24' width='30' height='6'/><rect y='12' width='30' height='6'/></svg>");
+        background-size: contain;
+    }
+
+    .menu #nav-trigger {
+        right: 115px;
+    }
+    .menu header {
+        right: 0;
+    }
+    .menu section {
+        margin-right: 100px;
+    }
+
+    /*
+     * The law says you cannot touch,
+     * but I see a lot of lawbreakers up in this house.
+     *
+     */
+    #nav-trigger,
+    header {
+        transition: right 0.2s;
+        -webkit-transition: right 0.2s;
+    }
+    section {
+        transition: margin-right 0.2s;
+        -webkit-transition: margin-right 0.2s;
+    }
+
 }

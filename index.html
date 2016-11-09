@@ -28,9 +28,11 @@
         scriptNode.parentNode.removeChild(scriptNode)
     </script>
 
-    <div id="app">
-        <header>
-            <nav><ul><li><router-link to="/">Lyrics</router-link></li><li v-for="a in alphabet"><router-link :to="{ path: '/db/' + a }" v-text="a"></router-link></li></ul><search-query></search-query></nav>
+    <a id="nav-trigger" href="javascript:void(document.body.className=document.body.className?'':'menu')"></a>
+
+    <div id="app" v-on:click="document.body.className=''">
+        <header v-on:click.stop>
+            <nav><search-query></search-query><ul><li><router-link to="/">Lyrics</router-link></li><li v-for="a in alphabet"><router-link :to="{ path: '/db/' + a }" v-text="a"></router-link></li></ul></nav>
         </header>
         <section id="main-content">
             <ul id="breadcrumbs"><li v-for="bc in breadcrumbs" v-if="bc"><router-link :to="{ path: bc.path }" v-text="bc.name"></a></li></ul>
