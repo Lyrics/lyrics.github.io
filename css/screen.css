@@ -47,24 +47,18 @@ header {
     height: 27px;
 }
 
-nav ul {
+nav a {
+    color: #eee;
+    font-size: 11px;
+    padding: 6px 8px;
+    min-width: 19px;
     display: inline-block;
+    text-align: center;
 }
-    nav li {
-        display: inline-block;
-    }
-        nav a {
-            color: #eee;
-            font-size: 11px;
-            padding: 3px 8px;
-            min-width: 19px;
-            display: inline-block;
-            text-align: center;
-        }
 
-        nav li:first-child {
-            padding-right: 1rem;
-        }
+nav a#home {
+    padding-right: 1rem;
+}
 
 input {
     width: 160px;
@@ -91,20 +85,17 @@ section,
     display: block;
     margin: 20px 0;
 }
-    #breadcrumbs li {
+    #breadcrumbs a {
         display: inline-block;
     }
-    #breadcrumbs li:after {
+    #breadcrumbs a:after {
         content: '→';
         color: rgba(0, 0, 0, .3);
-        padding: 0 2px;
+        padding: 0 4px 0 3px;
     }
-    #breadcrumbs li:last-child:after {
+    #breadcrumbs a:last-child:after {
         content: none;
     }
-        #breadcrumbs a {
-            padding-right: 4px;
-        }
 
 
 pre {
@@ -161,7 +152,7 @@ p a {
 #app {
     display: none;
 }
-html.has-js #app {
+.has-js #app {
     display: block;
 }
 .js-error {
@@ -208,7 +199,7 @@ body {
  */
 
 #breadcrumbs li:first-child a,
-nav li:first-child a {
+nav a#home {
     padding-left: 0;
 }
 
@@ -259,39 +250,38 @@ label {
         padding-bottom: 10rem;
     }
 
-    nav {
-        width: 100%;
-        text-align: center;
-        font-weight: bold;
-    }
-
-    nav li,
-    nav li:first-child {
-        display: block;
-        padding: .5rem 0;
-    }
-
-    nav a {
-        padding: 3px;
-    }
-
-    nav li:first-child a {
-        font-size: 130%;
-    }
-
     input {
         width: 88px;
         float: none;
         margin: .4rem auto;
     }
 
+    nav {
+        width: 100%;
+        text-align: center;
+    }
+
+    nav a#home {
+        display: block;
+        font-size: 130%;
+        padding: .3rem 1rem;
+    }
+
+    nav a {
+        display: inline-block;
+        padding: 1rem;
+        margin: 2px;
+        font-weight: bold;
+    }
+
     section {
         background: #FAFAFA;
         padding: .5rem 1rem;
+        padding-right: 60px;
     }
 
     #nav-trigger {
-        display: inline-block;
+        display: none;
         position: fixed;
         right: 1rem;
         top: 1rem;
@@ -301,6 +291,10 @@ label {
         cursor: pointer;
         background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' x='0px' y='0px' width='30px' height='30px' viewBox='0 0 30 30' enable-background='new 0 0 30 30' xml:space='preserve'><rect width='30' height='6'/><rect y='24' width='30' height='6'/><rect y='12' width='30' height='6'/></svg>");
         background-size: contain;
+    }
+
+    .has-js #nav-trigger {
+        display: inline-block;
     }
 
     .menu #nav-trigger {
