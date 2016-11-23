@@ -137,30 +137,12 @@ pre {
 
 .view {
     color: #222;
+    text-align: left;
 }
 
 .view a {
     display: block;
     line-height: 1.9;
-}
-
-
-/*
- * Agenda: center the lyrics sheet
- * to make it appear like a piece of paper on the screen
- *
- */
-
-.view {
-    text-align: center;
-}
-pre {
-    text-align: left;
-    margin-left: auto;
-    margin-right: auto;
-}
-.homepage {
-    text-align: left;
 }
 .homepage .view a {
     display: inline-block;
