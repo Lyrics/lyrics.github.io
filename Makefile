@@ -1,9 +1,7 @@
 all: clean build
 
-git-clean:
-	git rm -rf index.html db/
-
 clean:
+	git rm -rf index.html db/
 	rm -rf index.html db/
 
 build:
