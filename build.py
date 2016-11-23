@@ -22,7 +22,7 @@ def printAnchor( target, content ):
 
 def printBreadcrumbs(*items):
     output = ""
-    base = '/' + destDir
+    base = destDir
     for item in items:
         base = os.path.join( base, safePath(item) )
         output += printAnchor( base, item )
