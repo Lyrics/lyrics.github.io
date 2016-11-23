@@ -144,9 +144,10 @@ pre {
     display: block;
     line-height: 1.9;
 }
-.homepage .view a {
+.view .homepage a {
     display: inline-block;
     line-height: normal;
+    text-decoration: underline;
 }
 
 
