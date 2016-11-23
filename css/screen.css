@@ -104,6 +104,7 @@ pre {
     overflow: auto;
     text-shadow: none;
     background: #fff;
+    font-size: 0.95rem;
     border: solid 1px #f2f2f2;
     color: #222;
     font-weight: 400;
@@ -138,8 +139,9 @@ pre {
     color: #222;
 }
 
-p a {
-    text-decoration: underline;
+.view a {
+    display: block;
+    line-height: 1.9;
 }
 
 
@@ -149,26 +151,7 @@ p a {
  *
  */
 
-#app {
-    display: none;
-}
-.has-js #app {
-    display: block;
-}
-.js-error {
-    display: block;
-    margin: 3em;
-    text-align: center;
-}
-
-
-/*
- * Agenda: center the lyrics sheet
- * to make it appear like a piece of paper on the screen
- *
- */
-
-.content {
+.view {
     text-align: center;
 }
 pre {
@@ -176,9 +159,8 @@ pre {
     margin-left: auto;
     margin-right: auto;
 }
-#ls {
+.view a {
     text-align: left;
-    line-height: 1.9;
 }
 
 
@@ -199,19 +181,33 @@ body {
  *
  */
 
-#breadcrumbs li:first-child a,
-nav a#home {
+#breadcrumbs a:first-child,
+nav #home {
     padding-left: 0;
 }
 
 
 /*
- * Agenda: show off-screen menu instead of navbar for smaller screens
+ * Agenda: hide mobile ui controls
  *
  */
 
-#nav-trigger,
+#nav-trigger {
+  position: fixed;
+  clip: rect(0, 0, 0, 0);
+}
+
 label {
+    display: none;
+}
+
+
+/*
+ * Agenda: hide the search field for now
+ *
+ */
+
+form {
     display: none;
 }
 
@@ -219,22 +215,17 @@ label {
 /* All Mobile Sizes (devices and browser) */
 @media only screen and (max-width: 1023px) {
 
-    #app {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-    }
-
-    .content {
-        position: relative;
-    }
-
-    nav,
-    section,
-    .content {
-        width: auto;
+    label {
+        display: block;
+        position: fixed;
+        right: 1rem;
+        top: 1rem;
+        z-index: 2;
+        height: 30px;
+        width: 30px;
+        cursor: pointer;
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" width="30px" height="30px" viewBox="0 0 30 30" enable-background="new 0 0 30 30" xml:space="preserve"><rect width="30" height="6"/><rect y="24" width="30" height="6"/><rect y="12" width="30" height="6"/></svg>');
+        background-size: contain;
     }
 
     header {
@@ -244,72 +235,62 @@ label {
         top: 0;
         right: 0;
         bottom: 0;
-        z-index: 2;
+        z-index: 0;
         overflow-x: hidden;
         overflow-y: auto;
-        right: -100px;
-        padding-bottom: 10rem;
+        padding-bottom: 5rem;
     }
 
-    input {
-        width: 88px;
-        float: none;
-        margin: .4rem auto;
-    }
+        nav {
+            width: 100%;
+            text-align: center;
+        }
 
-    nav {
-        width: 100%;
-        text-align: center;
-    }
+            nav #home {
+                display: block;
+                font-size: 130%;
+                padding: .3rem 1rem;
+            }
 
-    nav a#home {
-        display: block;
-        font-size: 130%;
-        padding: .3rem 1rem;
-    }
+            nav a {
+                display: inline-block;
+                padding: 1rem;
+                margin: 2px;
+                font-weight: bold;
+            }
 
-    nav a {
-        display: inline-block;
-        padding: 1rem;
-        margin: 2px;
-        font-weight: bold;
-    }
+            nav input {
+                width: 88px;
+                float: none;
+                margin: .4rem auto;
+            }
+
 
     section {
+        min-height: 100%;
+        min-width: 100%;
+        position: relative;
+        top: 0;
+        bottom: 100%;
+        right: 0;
+        z-index: 1;
+
         background: #FAFAFA;
         padding: .5rem 1rem;
         padding-right: 60px;
     }
 
-    pre {
-        display: block;
+        pre {
+            display: block;
+        }
+
+    #nav-trigger:checked + label {
+      right: 115px;
     }
 
-    #nav-trigger {
-        display: none;
-        position: fixed;
-        right: 1rem;
-        top: 1rem;
-        z-index: 2;
-        height: 30px;
-        width: 30px;
-        cursor: pointer;
-        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' x='0px' y='0px' width='30px' height='30px' viewBox='0 0 30 30' enable-background='new 0 0 30 30' xml:space='preserve'><rect width='30' height='6'/><rect y='24' width='30' height='6'/><rect y='12' width='30' height='6'/></svg>");
-        background-size: contain;
-    }
-
-    .has-js #nav-trigger {
-        display: inline-block;
-    }
-
-    .menu #nav-trigger {
-        right: 115px;
-    }
-    .menu header {
-        right: 0;
-    }
-    .menu section {
-        margin-right: 100px;
+    #nav-trigger:checked ~ section {
+      right: 100px;
+      box-shadow: 0 0 5px 5px rgba(0,0,0,0.5);
     }
 
     /*
@@ -317,14 +298,11 @@ label {
      * but I see a lot of lawbreakers up in this house.
      *
      */
-    #nav-trigger,
-    header {
+    label,
+    header,
+    section {
         transition: right 0.2s;
         -webkit-transition: right 0.2s;
-    }
-    section {
-        transition: margin-right 0.2s;
-        -webkit-transition: margin-right 0.2s;
     }
 
 }
