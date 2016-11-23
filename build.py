@@ -5,6 +5,7 @@ import os
 siteName = 'Lyrics'
 srcDir = '../lyrics/database'
 destDir = 'db'
+indexFileName = 'index.html'
 
 tLayout = open('templates/layout.hbs', 'r').read()
 tHome = open('templates/home.hbs', 'r').read()
@@ -13,7 +14,7 @@ def safePath(path):
     return path.replace('/', '%2F')
 
 def createIndex(path):
-    indexFile = open(os.path.join(path, 'index.htm'), 'w')
+    indexFile = open(os.path.join(path, indexFileName), 'w')
     return indexFile
 
 def printAnchor( target, content ):
