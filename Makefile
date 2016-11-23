@@ -1,10 +1,10 @@
 all: clean build
 
 git-clean:
-	git rm -rf index.htm db/
+	git rm -rf index.html db/
 
 clean:
-	rm -rf index.htm db/
+	rm -rf index.html db/
 
 build:
 	mkdir -p db/
@@ -14,6 +14,6 @@ pull:
 	git pull
 
 push:
-	git add index.htm db/
+	git add index.html db/
 	git commit -am "update web content"
 	git push
