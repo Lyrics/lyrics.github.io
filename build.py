@@ -11,7 +11,7 @@ tLayout = open('templates/layout.hbs', 'r').read()
 tHome = open('templates/home.hbs', 'r').read()
 
 def safePath(path):
-    return path.replace('/', '%2F')
+    return path#.replace('/', '%2F')
 
 def createIndex(path):
     indexFile = open(os.path.join(path, indexFileName), 'w')

@@ -1,8 +1,7 @@
 all: clean build
 
 clean:
-	git rm -rf index.html db/
-	rm -rf index.html db/
+	git rm -rf index.html db/ || rm -rf index.html db/
 
 build:
 	mkdir -p db/

@@ -256,9 +256,9 @@ form {
     section {
         min-height: 100%;
         min-width: 100%;
-        position: relative;
+        position: absolute;
         top: 0;
-        bottom: 100%;
+        bottom: 0;
         right: 0;
         z-index: 1;
 
