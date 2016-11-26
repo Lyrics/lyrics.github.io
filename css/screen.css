@@ -216,6 +216,7 @@ form {
     }
 
     header {
+        display: none;
         position: fixed;
         width: 100px;
         height: 100%;
@@ -255,7 +256,7 @@ form {
 
     section {
         min-height: 100%;
-        min-width: 100%;
+        width: 100%;
         position: absolute;
         top: 0;
         bottom: 0;
@@ -273,6 +274,10 @@ form {
 
     #nav-trigger:checked + label {
       right: 115px;
+    }
+
+    #nav-trigger:checked ~ header {
+      display: block;
     }
 
     #nav-trigger:checked ~ section {
