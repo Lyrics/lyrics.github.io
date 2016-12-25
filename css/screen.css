@@ -111,6 +111,7 @@ pre {
     line-height: 1.5;
     display: inline-block;
     margin-top: 10px;
+    font-family: Lato, Verdana, Arial;
     box-shadow: 4px 4px 20px rgba(0, 0, 0, .1);
 }
 
