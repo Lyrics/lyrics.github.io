@@ -11,14 +11,14 @@ tLayout = open('templates/layout.hbs', 'r').read()
 tHome = open('templates/home.hbs', 'r').read()
 
 def safePath(path):
-    return path#.replace('/', '%2F')
+    return path.replace('?', '%3F')
 
 def createIndex(path):
     indexFile = open(os.path.join(path, indexFileName), 'w')
     return indexFile
 
 def printAnchor( target, content ):
-    return '<a href="/' + target + '">' + content + '</a>'
+    return '<a href="/' + target + '/">' + content + '</a>'
 
 def printBreadcrumbs(*items):
     output = ""

@@ -111,7 +111,6 @@ pre {
     line-height: 1.5;
     display: inline-block;
     margin-top: 10px;
-    margin-bottom: 50px;
     box-shadow: 4px 4px 20px rgba(0, 0, 0, .1);
 }
 
@@ -138,6 +137,7 @@ pre {
 .view {
     color: #222;
     text-align: left;
+    margin-bottom: 80px;
 }
 
 .view a {
