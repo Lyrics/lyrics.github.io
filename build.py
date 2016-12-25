@@ -84,7 +84,7 @@ for letter in sorted(os.listdir(srcDir)):
                             if not os.path.isfile(songPath):
                                 print songPath + " is not a file! 0x04"
                             else:
-                                lyrics = open(songPath, 'r').read()
+                                lyrics = open(songPath, 'r').read().strip()
                                 safeSongPath = os.path.join(destDir, letter, safePath(artist), safePath(album), safePath(song))
                                 # Append song link to db/X/artist/album/index.html
                                 songList += printAnchor(safeSongPath, song)
