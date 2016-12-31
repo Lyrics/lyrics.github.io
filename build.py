@@ -20,8 +20,8 @@ def createIndex(path):
     indexFile = open(os.path.join(path, indexFileName), 'w')
     return indexFile
 
-def printAnchor( target, content ):
-    return '<a href="/' + encodeURL(target) + '/">' + content + '</a>'
+def printAnchor(target, content):
+    return '<li><a href="/' + encodeURL(target) + '/">' + content + '</a><li>'
 
 def printBreadcrumbs(*items):
     output = ""
@@ -100,15 +100,15 @@ for letter in sorted(os.listdir(srcDir)):
 
                         content = tLayout.replace('{{title}}', album + ' by ' + artist + ' | ' + siteName)
                         content = content.replace('{{breadcrumbs}}', printBreadcrumbs(letter, artist, album))
-                        content = content.replace('{{content}}', songList)
+                        content = content.replace('{{content}}', '<ul>' + songList + '</ul>')
                         albumPathFile.write(content)
 
                 content = tLayout.replace('{{title}}', artist + ' | ' + siteName)
                 content = content.replace('{{breadcrumbs}}', printBreadcrumbs(letter, artist))
-                content = content.replace('{{content}}', albumList)
+                content = content.replace('{{content}}', '<ul>' + albumList + '</ul>')
                 artistPathFile.write(content)
 
         content = tLayout.replace('{{title}}', 'Artists starting on ' + letter + ' | ' + siteName)
         content = content.replace('{{breadcrumbs}}', printBreadcrumbs(letter))
-        content = content.replace('{{content}}', letterList)
+        content = content.replace('{{content}}', '<ul>' + letterList + '</ul>')
         letterPathFile.write(content)
