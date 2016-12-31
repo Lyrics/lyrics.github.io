@@ -21,7 +21,7 @@ def createIndex(path):
     return indexFile
 
 def printAnchor(target, content):
-    return '<li><a href="/' + encodeURL(target) + '/">' + content + '</a><li>'
+    return '<li><a href="/' + encodeURL(target) + '/">' + content + '</a></li>'
 
 def printBreadcrumbs(*items):
     output = ""
