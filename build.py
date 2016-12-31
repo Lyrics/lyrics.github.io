@@ -33,10 +33,10 @@ def printBreadcrumbs(*items):
     return output
 
 def printDescriptionList(items):
-    return ', '.join(items[:20])
+    return ', '.join(items[:24])
 
 def printDescriptionText(text):
-    return re.sub(' +', ' ', text.replace('\n', ' ')[:128]).strip()
+    return re.sub(' +', ' ', text.replace('\n', ' ')[:140]).strip()
 
 # 0. Create the root index file
 main = createIndex('')

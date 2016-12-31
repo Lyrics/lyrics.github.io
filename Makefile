@@ -12,7 +12,7 @@ pull:
 
 push:
 	git add index.html db/
-	git commit -am "update web content"
+	git commit -m "update web content"
 	git push
 
 .PHONY: all clean build pull push
