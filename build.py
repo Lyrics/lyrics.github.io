@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import os
+import re
 
 siteName = 'Lyrics'
 srcDir = '../lyrics/database'
@@ -31,9 +32,19 @@ def printBreadcrumbs(*items):
         output += printAnchor(base, item)
     return output
 
+def printDescriptionList(items):
+    return ', '.join(items[:20])
+
+def printDescriptionText(text):
+    return re.sub(' +', ' ', text.replace('\n', ' ')[:128]).strip()
+
 # 0. Create the root index file
 main = createIndex('')
-main.write(tLayout.replace('{{title}}', siteName).replace('{{breadcrumbs}}', "").replace('{{content}}', tHome))
+content = tLayout.replace('{{title}}', siteName)
+content = content.replace('{{breadcrumbs}}', "")
+content = content.replace('{{content}}', tHome)
+content = content.replace('{{description}}', "Web interface to the lyrics database hosted on GitHub")
+main.write(content)
 
 # 1. Loop through letters in the database
 for letter in sorted(os.listdir(srcDir)):
@@ -46,10 +57,11 @@ for letter in sorted(os.listdir(srcDir)):
         os.mkdir(safeLetterPath)
         # Create db/X/index.html
         letterPathFile = createIndex(safeLetterPath)
+        letters = sorted(os.listdir(letterPath))
         letterList = ""
 
         # 2. Loop through artists starting with letter X
-        for artist in sorted(os.listdir(letterPath)):
+        for artist in letters:
             artistPath = os.path.join(letterPath, artist)
             if not os.path.isdir(artistPath):
                 print artistPath + " is not a dir! 0x02"
@@ -61,10 +73,11 @@ for letter in sorted(os.listdir(srcDir)):
                 os.mkdir(safeArtistPath)
                 # Create db/X/artist/index.html
                 artistPathFile = createIndex(safeArtistPath)
+                albums = sorted(os.listdir(artistPath))
                 albumList = ""
 
                 # 3. Loop through artist's albums
-                for album in sorted(os.listdir(artistPath)):
+                for album in albums:
                     albumPath = os.path.join(artistPath, album)
                     if not os.path.isdir(albumPath):
                         print albumPath + " is not a dir! 0x03"
@@ -76,10 +89,11 @@ for letter in sorted(os.listdir(srcDir)):
                         os.mkdir(safeAlbumPath)
                         # Create db/X/artist/album/index.htm
                         albumPathFile = createIndex(safeAlbumPath)
+                        songs = sorted(os.listdir(albumPath))
                         songList = ""
 
                         # 4. Loop through songs
-                        for song in sorted(os.listdir(albumPath)):
+                        for song in songs:
                             songPath = os.path.join(albumPath, song)
                             if not os.path.isfile(songPath):
                                 print songPath + " is not a file! 0x04"
@@ -96,19 +110,23 @@ for letter in sorted(os.listdir(srcDir)):
                                 content = tLayout.replace('{{title}}', artist + ' - ' + song + ' | ' + siteName)
                                 content = content.replace('{{breadcrumbs}}', printBreadcrumbs(letter, artist, album, song))
                                 content = content.replace('{{content}}', '<pre>' + lyrics + '</pre>')
+                                content = content.replace('{{description}}', printDescriptionText(lyrics))
                                 songPathFile.write(content)
 
-                        content = tLayout.replace('{{title}}', album + ' by ' + artist + ' | ' + siteName)
+                        content = tLayout.replace('{{title}}', 'Album ' + album + ' by ' + artist + ' | ' + siteName)
                         content = content.replace('{{breadcrumbs}}', printBreadcrumbs(letter, artist, album))
                         content = content.replace('{{content}}', '<ul>' + songList + '</ul>')
+                        content = content.replace('{{description}}', printDescriptionList(songs))
                         albumPathFile.write(content)
 
-                content = tLayout.replace('{{title}}', artist + ' | ' + siteName)
+                content = tLayout.replace('{{title}}', 'Albums by ' + artist + ' | ' + siteName)
                 content = content.replace('{{breadcrumbs}}', printBreadcrumbs(letter, artist))
                 content = content.replace('{{content}}', '<ul>' + albumList + '</ul>')
+                content = content.replace('{{description}}', printDescriptionList(albums))
                 artistPathFile.write(content)
 
         content = tLayout.replace('{{title}}', 'Artists starting on ' + letter + ' | ' + siteName)
         content = content.replace('{{breadcrumbs}}', printBreadcrumbs(letter))
         content = content.replace('{{content}}', '<ul>' + letterList + '</ul>')
+        content = content.replace('{{description}}', printDescriptionList(letters))
         letterPathFile.write(content)
