@@ -119,13 +119,13 @@ for letter in sorted(os.listdir(srcDir)):
                         content = content.replace('{{description}}', printDescriptionList(songs))
                         albumPathFile.write(content)
 
-                content = tLayout.replace('{{title}}', 'Albums by ' + artist + ' | ' + siteName)
+                content = tLayout.replace('{{title}}', artist + ' | ' + siteName)
                 content = content.replace('{{breadcrumbs}}', printBreadcrumbs(letter, artist))
                 content = content.replace('{{content}}', '<ul>' + albumList + '</ul>')
                 content = content.replace('{{description}}', printDescriptionList(albums))
                 artistPathFile.write(content)
 
-        content = tLayout.replace('{{title}}', 'Artists starting on ' + letter + ' | ' + siteName)
+        content = tLayout.replace('{{title}}', 'Artists starting with ' + letter + ' | ' + siteName)
         content = content.replace('{{breadcrumbs}}', printBreadcrumbs(letter))
         content = content.replace('{{content}}', '<ul>' + letterList + '</ul>')
         content = content.replace('{{description}}', printDescriptionList(letters))
