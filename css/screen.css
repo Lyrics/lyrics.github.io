@@ -286,6 +286,10 @@ form {
             display: block;
         }
 
+    .view li {
+        margin: 4px 0;
+    }
+
     #nav-trigger:checked + label {
       right: 115px;
     }
