@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 import os
 import re
@@ -107,7 +108,7 @@ for letter in sorted(os.listdir(srcDir)):
                                 # Create db/X/artist/album/song/index.html
                                 songPathFile = createIndex(safeSongPath)
                                 # Populate it with lyrics
-                                content = tLayout.replace('{{title}}', artist + ' - ' + song + ' | ' + siteName)
+                                content = tLayout.replace('{{title}}', artist + ' – ' + song + ' | ' + siteName)
                                 content = content.replace('{{breadcrumbs}}', printBreadcrumbs(letter, artist, album, song))
                                 content = content.replace('{{content}}', '<pre>' + lyrics + '</pre>')
                                 content = content.replace('{{description}}', printDescriptionText(lyrics))
