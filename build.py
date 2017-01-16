@@ -16,7 +16,7 @@ def safePath(path):
     return path#.replace('/', '%2F')
 
 def encodeURL(path):
-    return path.replace('?', '%3F').replace('%', '%25')
+    return path.replace('%', '%25').replace('?', '%3F')
 
 def createIndex(path):
     indexFile = open(os.path.join(path, indexFileName), 'w')
