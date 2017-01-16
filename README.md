@@ -11,3 +11,8 @@ Web front-end to the lyrics database
 ### Fast build & deploy
 
     make clean build push
+
+
+### Run a local web-server
+
+    make server

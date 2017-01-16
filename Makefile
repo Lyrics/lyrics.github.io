@@ -15,4 +15,7 @@ push:
 	git commit -m "update web content"
 	git push
 
-.PHONY: all clean build pull push
+server:
+	python -m SimpleHTTPServer 8100
+
+.PHONY: all clean build pull push server
