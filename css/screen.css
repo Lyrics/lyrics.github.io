@@ -69,7 +69,6 @@ input {
     padding: 2px 8px;
     border: none;
     margin: 4px;
-    float: right;
 }
 
 nav,
@@ -120,22 +119,7 @@ pre {
 
 
 .error {
-  color: #c00;
-}
-
-.content {
-  position: absolute;
-  transition: all .15s ease;
-}
-
-.slide-enter {
-  opacity: 0;
-  transform: translate(30px, 0);
-}
-
-.slide-leave-active {
-  opacity: 0;
-  transform: translate(-30px, 0);
+    color: #c00;
 }
 
 .view {
@@ -205,12 +189,16 @@ label {
 
 
 /*
- * Agenda: hide the search field for now
+ * Agenda: hide the search field unless JS in on
  *
  */
 
 form {
     display: none;
+}
+
+.js form {
+    display: inline-block;
 }
 
 
@@ -251,9 +239,6 @@ form {
             }
 
             nav input {
-                width: 88px;
-                float: none;
-                margin: .4rem auto;
             }
 
     section {

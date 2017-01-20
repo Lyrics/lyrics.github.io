@@ -12,15 +12,16 @@ srcDir = '../lyrics/database'
 destDir = 'db'
 indexFileName = 'index.html'
 sitemapFileName = 'sitemap.xml'
+searchFileName = 'search.html'
 
 tLayout = open('templates/layout.hbs', 'r').read()
 tHome = open('templates/home.hbs', 'r').read()
+tSearch = open('templates/search.hbs', 'r').read()
 
 def safePath(path):
     return path.lower().replace(' ', '-')
 
 def encodeURL(path):
-    #return path.replace('%', '%25').replace('?', '%3F')
     return escape(quote(path, safe='/&\'"<>'))
 
 def createHTML(path):
@@ -28,6 +29,9 @@ def createHTML(path):
 
 def createXML():
     return open(sitemapFileName, 'w')
+
+def createSearch():
+    return open(searchFileName, 'w')
 
 def printAnchor(target, content):
     return '<li><a href="/' + encodeURL(target) + '/">' + content + '</a></li>'
@@ -63,11 +67,10 @@ content = content.replace('{{content}}', tHome)
 content = content.replace('{{description}}', "Web interface to the lyrics database hosted on GitHub")
 main.write(content)
 
-# 0s. Define initial sitemap code
+# 0x. Define initial sitemap code
 sitemapXML = '<?xml version="1.0" encoding="UTF-8"?>\n'
 sitemapXML += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
 sitemapXML += printSitemapURL('', .31)
-sitemapXML += printSitemapURL('db', .31)
 
 # 1. Loop through letters in the database
 for letter in sorted(os.listdir(srcDir)):
@@ -135,7 +138,7 @@ for letter in sorted(os.listdir(srcDir)):
                                 # Populate it with lyrics
                                 content = tLayout.replace('{{title}}', artist + ' – ' + song + ' | ' + siteName)
                                 content = content.replace('{{breadcrumbs}}', printBreadcrumbs(letter, artist, album, song))
-                                content = content.replace('{{content}}', '<pre>' + escape(lyrics) + '</pre>')
+                                content = content.replace('{{content}}', '<pre>' + lyrics + '</pre>')
                                 content = content.replace('{{description}}', printDescriptionText(lyrics))
                                 songPathFile.write(content)
                                 sitemapXML += printSitemapURL(safeSongPath, 1)
@@ -158,7 +161,15 @@ for letter in sorted(os.listdir(srcDir)):
         content = content.replace('{{description}}', printDescriptionList(letters))
         letterPathFile.write(content)
 
-# 1s. Write the sitemap file
+# 1x. Write the sitemap file
 sitemapFile = createXML()
 sitemapXML += '</urlset>\n'
 sitemapFile.write(sitemapXML.encode('utf-8'))
+
+# 1s. Generate the search page
+search = createSearch()
+content = tLayout.replace('{{title}}', 'Search' + ' | ' + siteName)
+content = content.replace('{{breadcrumbs}}', "")
+content = content.replace('{{content}}', tSearch)
+content = content.replace('{{description}}', "Find lyrics using GitHub's code search engine")
+search.write(content)
