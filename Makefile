@@ -1,4 +1,4 @@
-all: clean build
+all: clean pull build
 
 clean:
 	git rm -rf index.html db/ sitemap.xmp search.html || rm -rf index.html db/ sitemap.xml search.html
@@ -9,6 +9,7 @@ build:
 
 pull:
 	git pull
+	git submodule update --recursive --remote
 
 push:
 	git add index.html db/ sitemap.xml search.html
