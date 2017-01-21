@@ -8,7 +8,7 @@ from xml.sax.saxutils import escape
 
 siteURL = 'https://lyrics.github.io'
 siteName = 'Lyrics'
-srcDir = '../lyrics/database'
+srcDir = 'lyrics/database'
 destDir = 'db'
 indexFileName = 'index.html'
 sitemapFileName = 'sitemap.xml'

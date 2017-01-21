@@ -1,0 +1,3 @@
+[submodule "lyrics"]
+	path = lyrics
+	url = https://github.com/Lyrics/lyrics
