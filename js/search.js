@@ -35,9 +35,10 @@ var API = {
 var Search = {
     data: function () {
         return {
+            init: true,
             loading: false,
-            items: null,
-            error: null
+            error: null,
+            items: null
         }
     },
     created: function () {
@@ -49,15 +50,16 @@ var Search = {
     },
     methods: {
         fetchData: debounce(function () {
-            this.error = this.items = null
+            this.init = false
             this.loading = true
+            this.error = this.items = null
 
             API.search(this.$route.query.q, function (err, items) {
                 this.loading = false
 
                 if (err) {
                     this.error = err.toString()
-                } else {
+                } else if (items.length) {
                     this.items = items
                 }
             }.bind(this))
@@ -66,14 +68,15 @@ var Search = {
     template: '<div class="search">' +
                 '<div class="loading" v-if="loading">Loading…</div>' +
                 '<div v-if="error" class="error">{{ error }}</div>' +
-                '<transition name="slide">' +
-                 '<div v-if="items" class="content">' +
+                '<div v-if="items" class="content">' +
                   '<ul id="ls">' +
-                   '<li v-for="item in items"><a :href="formatURL(item.path.substring(8))">{{ item.path.split("/")[2] }} – {{ item.name }}</a></li>' +
+                    '<li v-for="item in items"><a :href="formatURL(item.path.substring(8))">{{ item.path.split("/")[2] }} – {{ item.name }}</a></li>' +
                   '</ul>' +
-                 '</div>' +
-                '</transition>' +
-                '</div>'
+                '</div>' +
+                '<div v-if="!init && !loading && !error && !items" class="content">' +
+                  '<p>No results</p>' +
+                '</div>' +
+              '</div>'
 }
 
 
