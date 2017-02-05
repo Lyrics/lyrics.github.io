@@ -13,6 +13,7 @@ destDir = 'db'
 indexFileName = 'index.html'
 sitemapFileName = 'sitemap.xml'
 searchFileName = 'search.html'
+classNames = [ 'l', 'a', 'd', 'c' ] # letter, album, disc, composition
 
 tLayout = open('templates/layout.hbs', 'r').read()
 tHome = open('templates/home.hbs', 'r').read()
@@ -33,8 +34,8 @@ def createXML():
 def createSearch():
     return open(searchFileName, 'w')
 
-def printAnchor(target, content):
-    return '<li><a href="/' + encodeURL(target) + '/">' + content + '</a></li>'
+def printAnchor(target, content, depth):
+    return '<li class="' + classNames[depth] + '"><a href="/' + encodeURL(target) + '/">' + content + '</a></li>'
 
 def printSitemapURL(target, priority):
     URL = siteURL + '/' + encodeURL(target)
@@ -47,10 +48,12 @@ def printSitemapURL(target, priority):
 
 def printBreadcrumbs(*items):
     output = ""
+    depth = 0
     base = destDir
     for item in items:
         base = os.path.join(base, safePath(item))
-        output += printAnchor(base, item)
+        output += printAnchor(base, item, depth)
+        depth += 1
     return output
 
 def printDescriptionList(items):
@@ -95,7 +98,7 @@ for letter in sorted(os.listdir(srcDir)):
             else:
                 safeArtistPath = safePath(os.path.join(destDir, letter, artist))
                 # Append artist link to db/x/index.html
-                letterList += printAnchor(safeArtistPath, artist)
+                letterList += printAnchor(safeArtistPath, artist, 1)
                 # Create db/x/artist/
                 os.mkdir(safeArtistPath)
                 # Create db/x/artist/index.html
@@ -112,7 +115,7 @@ for letter in sorted(os.listdir(srcDir)):
                     else:
                         safeAlbumPath = safePath(os.path.join(destDir, letter, artist, album))
                         # Append album link to db/x/artist/index.html
-                        albumList += printAnchor(safeAlbumPath, album)
+                        albumList += printAnchor(safeAlbumPath, album, 2)
                         # Create db/x/artist/album/
                         os.mkdir(safeAlbumPath)
                         # Create db/x/artist/album/index.htm
@@ -130,7 +133,7 @@ for letter in sorted(os.listdir(srcDir)):
                                 lyrics = open(songPath, 'r').read().strip()
                                 safeSongPath = safePath(os.path.join(destDir, letter, artist, album, song))
                                 # Append song link to db/x/artist/album/index.html
-                                songList += printAnchor(safeSongPath, song)
+                                songList += printAnchor(safeSongPath, song, 3)
                                 # Create db/x/artist/album/song/
                                 os.mkdir(safeSongPath)
                                 # Create db/x/artist/album/song/index.html
