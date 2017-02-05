@@ -18,6 +18,7 @@ classNames = [ 'l', 'a', 'd', 'c' ] # letter, album, disc, composition
 tLayout = open('templates/layout.hbs', 'r').read()
 tHome = open('templates/home.hbs', 'r').read()
 tSearch = open('templates/search.hbs', 'r').read()
+t404 = open('templates/404.hbs', 'r').read()
 
 def safePath(path):
     return path.lower().replace(' ', '-')
@@ -25,8 +26,8 @@ def safePath(path):
 def encodeURL(path):
     return escape(quote(path, safe='/&\'"<>'))
 
-def createHTML(path):
-    return open(os.path.join(path, indexFileName), 'w')
+def createHTML(path, filename):
+    return open(os.path.join(path, filename), 'w')
 
 def createXML():
     return open(sitemapFileName, 'w')
@@ -63,7 +64,7 @@ def printDescriptionText(text):
     return re.sub(' +', ' ', text.replace('\n', ' ')[:220]).strip()
 
 # 0. Create the root index file
-main = createHTML('')
+main = createHTML('', indexFileName)
 content = tLayout.replace('{{title}}', siteName)
 content = content.replace('{{breadcrumbs}}', "")
 content = content.replace('{{content}}', tHome)
@@ -85,7 +86,7 @@ for letter in sorted(os.listdir(srcDir)):
         # Create db/x/
         os.mkdir(safeLetterPath)
         # Create db/x/index.html
-        letterPathFile = createHTML(safeLetterPath)
+        letterPathFile = createHTML(safeLetterPath, indexFileName)
         letters = sorted(os.listdir(letterPath))
         letterList = ""
         sitemapXML += printSitemapURL(safeLetterPath, .56)
@@ -102,7 +103,7 @@ for letter in sorted(os.listdir(srcDir)):
                 # Create db/x/artist/
                 os.mkdir(safeArtistPath)
                 # Create db/x/artist/index.html
-                artistPathFile = createHTML(safeArtistPath)
+                artistPathFile = createHTML(safeArtistPath, indexFileName)
                 albums = sorted(os.listdir(artistPath))
                 albumList = ""
                 sitemapXML += printSitemapURL(safeArtistPath, .85)
@@ -119,7 +120,7 @@ for letter in sorted(os.listdir(srcDir)):
                         # Create db/x/artist/album/
                         os.mkdir(safeAlbumPath)
                         # Create db/x/artist/album/index.htm
-                        albumPathFile = createHTML(safeAlbumPath)
+                        albumPathFile = createHTML(safeAlbumPath, indexFileName)
                         songs = sorted(os.listdir(albumPath))
                         songList = ""
                         sitemapXML += printSitemapURL(safeAlbumPath, .93)
@@ -137,7 +138,7 @@ for letter in sorted(os.listdir(srcDir)):
                                 # Create db/x/artist/album/song/
                                 os.mkdir(safeSongPath)
                                 # Create db/x/artist/album/song/index.html
-                                songPathFile = createHTML(safeSongPath)
+                                songPathFile = createHTML(safeSongPath, indexFileName)
                                 # Populate it with lyrics
                                 content = tLayout.replace('{{title}}', artist + ' – ' + song + ' | ' + siteName)
                                 content = content.replace('{{breadcrumbs}}', printBreadcrumbs(letter, artist, album, song))
@@ -172,7 +173,15 @@ sitemapFile.write(sitemapXML.encode('utf-8'))
 # 1s. Generate the search page
 search = createSearch()
 content = tLayout.replace('{{title}}', 'Search' + ' | ' + siteName)
-content = content.replace('{{breadcrumbs}}', "")
+content = content.replace('{{breadcrumbs}}', '')
 content = content.replace('{{content}}', tSearch)
 content = content.replace('{{description}}', "Find lyrics using GitHub's code search engine")
 search.write(content)
+
+# 0e. Create the 404 page
+four0four = createHTML('', '404.html')
+content = tLayout.replace('{{title}}', siteName)
+content = content.replace('{{breadcrumbs}}', '')
+content = content.replace('{{content}}', t404)
+content = content.replace('{{description}}', "Error #404: page not found. Apparently something got (re)moved.")
+four0four.write(content)

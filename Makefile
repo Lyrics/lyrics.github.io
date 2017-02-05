@@ -1,7 +1,9 @@
+HTMLs = index.html db/ sitemap.xml search.html 404.html
+
 all: clean pull build
 
 clean:
-	git rm -rf index.html db/ sitemap.xmp search.html || rm -rf index.html db/ sitemap.xml search.html
+	git rm -rf $(HTMLs) || rm -rf $(HTMLs)
 
 build:
 	mkdir -p db/
@@ -12,7 +14,7 @@ pull:
 	git submodule update --recursive --remote
 
 push:
-	git add index.html db/ sitemap.xml search.html
+	git add $(HTMLs)
 	git commit -m "update web content"
 	git push
 
