@@ -15,9 +15,7 @@ html {
 body {
     color: #111;
     min-height: 100%;
-    font-family: Lato, Verdana, Arial;
-    font-size: 14px;
-    background: #FAFAFA url(../i/bg.jpg);
+    background: #f2f2f2;
 }
 
 ul {
@@ -50,16 +48,15 @@ header {
 
 nav a {
     color: #eee;
-    font-size: 11px;
-    padding: 6px 8px;
-    min-width: 19px;
     display: inline-block;
+    min-width: 19px;
+    font-size: 0.8em;
+    padding: 6px 8px;
     text-align: center;
 }
 
 nav a#home {
     padding-right: 1rem;
-    font-size: 12px;
 }
 
 input {
@@ -105,14 +102,11 @@ pre {
     overflow: auto;
     text-shadow: none;
     background: #fff;
-    font-size: 0.95rem;
     border: solid 1px #f2f2f2;
     color: #222;
     font-weight: 400;
     line-height: 1.5;
     display: inline-block;
-    margin-top: 10px;
-    font-family: Lato, Verdana, Arial;
     box-shadow: 4px 4px 20px rgba(0, 0, 0, .1);
     text-align: left;
 }
@@ -227,7 +221,6 @@ form {
         }
 
             nav a#home {
-                font-size: 130%;
                 padding: .3rem 1rem;
             }
 
@@ -244,7 +237,7 @@ form {
 
     section {
         width: 100%;
-        background: #FAFAFA;
+        background: inherit;
         padding: .5rem 1rem;
     }
 
