@@ -150,7 +150,6 @@ pre {
  * every time Y overflow appears or goes away
  *
  */
-
 body {
     overflow-y: scroll;
 }
@@ -160,7 +159,6 @@ body {
  * Agenda: align navigation and breadcrumbs to the leftmost vertical line
  *
  */
-
 #breadcrumbs a:first-child,
 nav #home {
     padding-left: 0;
@@ -171,12 +169,10 @@ nav #home {
  * Agenda: hide mobile ui controls
  *
  */
-
 #nav-trigger {
   position: fixed;
   clip: rect(0, 0, 0, 0);
 }
-
 label {
     display: none;
 }
@@ -186,11 +182,9 @@ label {
  * Agenda: hide the search field unless JS in on
  *
  */
-
 form {
     display: none;
 }
-
 .js form {
     display: inline-block;
 }
@@ -198,6 +192,15 @@ form {
 
 /* All Mobile Sizes (devices and browser) */
 @media only screen and (max-width: 1023px) {
+
+    /*
+     * Agenda: inforce font-family on mobile devices
+     *
+     */
+    body,
+    pre {
+        font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    }
 
     header {
         display: block;
