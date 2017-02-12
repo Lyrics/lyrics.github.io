@@ -96,15 +96,13 @@ section {
     }
 
 
-pre {
+#lyrics {
     white-space: pre;
     padding: 20px;
     overflow: auto;
-    text-shadow: none;
     background: #fff;
     border: solid 1px #f2f2f2;
     color: #222;
-    font-weight: 400;
     line-height: 1.5;
     display: inline-block;
     box-shadow: 4px 4px 20px rgba(0, 0, 0, .1);
@@ -197,8 +195,7 @@ form {
      * Agenda: inforce font-family on mobile devices
      *
      */
-    body,
-    pre {
+    body {
         font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
     }
 
@@ -244,7 +241,7 @@ form {
         padding: .5rem 1rem;
     }
 
-        pre {
+        #lyrics {
             display: block;
             padding: .5rem;
         }

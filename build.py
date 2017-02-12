@@ -142,7 +142,7 @@ for letter in sorted(os.listdir(srcDir)):
                                 # Populate it with lyrics
                                 content = tLayout.replace('{{title}}', artist + ' – ' + song + ' | ' + siteName)
                                 content = content.replace('{{breadcrumbs}}', printBreadcrumbs(letter, artist, album, song))
-                                content = content.replace('{{content}}', '<pre>' + lyrics + '</pre>')
+                                content = content.replace('{{content}}', '<div id="lyrics">' + lyrics + '</div>')
                                 content = content.replace('{{description}}', printDescriptionText(lyrics))
                                 songPathFile.write(content)
                                 sitemapXML += printSitemapURL(safeSongPath, 1)
