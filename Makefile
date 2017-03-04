@@ -19,6 +19,7 @@ push:
 	git push
 
 server:
-	python -m SimpleHTTPServer 8100
+	@echo "Starting local server at http://0.0.0.0:8100"
+	@python -m SimpleHTTPServer 8100
 
 .PHONY: all clean build pull push server

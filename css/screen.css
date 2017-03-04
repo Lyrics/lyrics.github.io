@@ -1,3 +1,7 @@
+/*
+ * Agenda: micro-reset
+ *
+ */
 *,
 *:before,
 *:after {
@@ -6,6 +10,23 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+}
+
+/*
+ * Agenda: hide selection highlight from certain elements
+ *         and let users quickly select lyrics
+ *         with MOD+A and copy with MOD+C
+ *
+ */
+nav,
+#breadcrumbs {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* IE/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
 }
 
 html {
@@ -42,7 +63,6 @@ p {
 
 header {
     background: #333;
-    height: 27px;
     white-space: nowrap;
 }
 
@@ -51,7 +71,7 @@ nav a {
     display: inline-block;
     min-width: 19px;
     font-size: 0.8em;
-    padding: 6px 8px;
+    padding: 12px 9px;
     text-align: center;
 }
 
@@ -59,8 +79,12 @@ nav a#home {
     padding-right: 1rem;
 }
 
+form {
+    padding-left: 1rem;
+}
+
 input {
-    width: 160px;
+    width: 130px;
     border-radius: 10px;
     outline: 0;
     padding: 2px 8px;
@@ -133,11 +157,13 @@ section {
             display: inline-block;
         }
 
-.homepage {
+.homepage,
+.not-found {
     margin: 52px 0;
     text-align: left;
 }
-.homepage a {
+.homepage a,
+.not-found a {
     text-decoration: underline;
 }
 
