@@ -14,12 +14,9 @@
 
 /*
  * Agenda: hide selection highlight from certain elements
- *         and let users quickly select lyrics
- *         with MOD+A and copy with MOD+C
  *
  */
-nav,
-#breadcrumbs {
+nav {
   -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
      -khtml-user-select: none; /* Konqueror HTML */
