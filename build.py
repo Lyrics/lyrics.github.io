@@ -24,7 +24,7 @@ def safePath(path):
     return path.lower().replace(' ', '-')
 
 def encodeURL(path):
-    return escape(quote(path, safe='/,@&\'"<>!()'))
+    return escape(quote(path, safe='/,@&\'"<>!():'))
 
 def createHTML(path, filename):
     return open(os.path.join(path, filename), 'w')
