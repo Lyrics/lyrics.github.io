@@ -61,7 +61,7 @@ def printDescriptionList(items):
     return ', '.join(items[:24])
 
 def printDescriptionText(text):
-    return re.sub(' +', ' ', text.replace('\n', ' ')[:220]).strip()
+    return re.sub(' +', ' ', text.replace('\n', '/')[:220]).strip()
 
 # 0. Create the root index file
 main = createHTML('', indexFileName)
