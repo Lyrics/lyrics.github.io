@@ -2,22 +2,23 @@
 
 Web front-end to the lyrics database
 
-### Clone
+## Clone
 
-    git clone git@github.com:Lyrics/lyrics.git
+    git clone git@github.com:Lyrics/lyrics.github.io.git
+    cd lyrics.github.io
     git submodule update --init --recursive
 
 
-### Build
+## Build
 
     make all
 
 
-### Deploy
+## Deploy
 
     make push
 
 
-### Run a local web-server
+## Run a local web-server
 
     make server
