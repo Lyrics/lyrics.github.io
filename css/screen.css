@@ -52,6 +52,14 @@ a:hover {
     opacity: 1;
 }
 
+h1,
+h2,
+h3,
+h4 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
 p {
     margin-bottom: .5rem;
 }
