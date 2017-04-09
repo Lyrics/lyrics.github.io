@@ -124,7 +124,6 @@ nav,
 
 
 #lyrics {
-    white-space: pre;
     padding: 20px;
     overflow: auto;
     background: #fff;
@@ -135,6 +134,12 @@ nav,
     box-shadow: 4px 4px 20px rgba(0, 0, 0, .1);
     text-align: left;
 }
+    #lyrics p {
+        padding-bottom: 1rem;
+    }
+    #lyrics p:last-child {
+        padding-bottom: 0;
+    }
 
 
 .error {
