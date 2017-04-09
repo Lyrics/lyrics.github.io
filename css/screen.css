@@ -221,8 +221,8 @@ form {
 }
 
 
-/* All Mobile Sizes (devices and browser) */
-@media only screen and (max-width: 1023px) {
+/* Mobile CSS */
+@media only screen and (max-width: 920px) {
 
     /*
      * Agenda: inforce font-family on mobile devices
@@ -235,7 +235,7 @@ form {
     #header {
         display: block;
         width: 100%;
-        height: 5rem;
+        height: 4.9rem;
         overflow-x: auto;
         overflow-y: hidden;
         margin: -1rem 0;
@@ -254,13 +254,13 @@ form {
         }
 
             nav a#home {
-                padding: .3rem 1rem;
+                padding: .7rem .5rem;
             }
 
             nav a {
                 display: inline-block;
-                padding: 1rem;
-                margin: 2px;
+                padding: .7rem .5rem;
+                margin: .2rem;
                 font-weight: bold;
             }
 
