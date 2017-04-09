@@ -57,6 +57,11 @@ def printBreadcrumbs(*items):
         depth += 1
     return output
 
+def printLyrics(text):
+    paragraphed = re.sub('\n\n+', '</p><p>', text)
+    linebroken = re.sub('\n', '<br/>', paragraphed)
+    return '<p>' + linebroken + '</p>'
+
 def printDescriptionList(items):
     return ', '.join(items[:24])
 
@@ -142,7 +147,7 @@ for letter in sorted(os.listdir(srcDir)):
                                 # Populate it with lyrics
                                 content = tLayout.replace('{{title}}', artist + ' – ' + song + ' | ' + siteName)
                                 content = content.replace('{{breadcrumbs}}', printBreadcrumbs(letter, artist, album, song))
-                                content = content.replace('{{content}}', '<div id="lyrics">' + lyrics + '</div>')
+                                content = content.replace('{{content}}', '<article id="lyrics">' + printLyrics(lyrics) + '</article>')
                                 content = content.replace('{{description}}', printDescriptionText(lyrics))
                                 songPathFile.write(content)
                                 sitemapXML += printSitemapURL(safeSongPath, 1)
