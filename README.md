@@ -22,3 +22,7 @@ Web front-end to the lyrics database
 ## Run a local web-server
 
     make server
+
+## Credits
+
+Favicon design by [@defanor](https://github.com/defanor)
