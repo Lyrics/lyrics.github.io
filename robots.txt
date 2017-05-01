@@ -2,4 +2,6 @@ Host: lyrics.github.io
 Sitemap: https://lyrics.github.io/sitemap.xml
 
 User-Agent: *
-Disallow: /js/ /css/ /templates/
+Disallow: /js/
+Disallow: /css/
+Disallow: /templates/
