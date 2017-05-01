@@ -1,5 +1,5 @@
+Host: lyrics.github.io
 Sitemap: https://lyrics.github.io/sitemap.xml
 
 User-Agent: *
 Disallow: js/ css/ templates/
-Host: lyrics.github.io
