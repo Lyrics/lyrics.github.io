@@ -32,6 +32,7 @@ body {
     color: #111;
     min-height: 100%;
     background: #f2f2f2;
+    font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 }
 
 ul {
@@ -98,11 +99,11 @@ input {
 nav,
 #content {
     margin: 0 auto;
+    width: 900px;
 }
 
-nav,
 #content {
-    width: 900px;
+    position: relative;
 }
 
 #breadcrumbs {
@@ -223,14 +224,6 @@ form {
 
 /* Mobile CSS */
 @media only screen and (max-width: 920px) {
-
-    /*
-     * Agenda: inforce font-family on mobile devices
-     *
-     */
-    body {
-        font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
-    }
 
     #header {
         display: block;
