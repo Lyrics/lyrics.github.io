@@ -23,6 +23,10 @@ Web front-end to the lyrics database
 
     make server
 
+## Quickly update the website
+
+    make pull clean build push
+
 ## Credits
 
 Favicon design by [@defanor](https://github.com/defanor)
