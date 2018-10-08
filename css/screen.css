@@ -114,13 +114,10 @@ nav,
     #breadcrumbs li {
         display: inline-block;
     }
-    #breadcrumbs li:after {
+    #breadcrumbs li span:after {
         content: '→';
         color: rgba(0, 0, 0, .3);
         padding: 0 4px 0 3px;
-    }
-    #breadcrumbs li:last-child:after {
-        content: none;
     }
 
 
@@ -275,6 +272,34 @@ form {
 
     .view li {
         margin: 4px 0;
+    }
+
+}
+
+
+/* Paper CSS */
+@media print {
+
+    body {
+        margin: 0;
+        font-size: 14px;
+    }
+
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        line-height: 20px;
+    }
+
+    a {
+        color: #000;
+        text-decoration: none;
+    }
+
+    #header,
+    #breadcrumbs {
+        display: none;
     }
 
 }
