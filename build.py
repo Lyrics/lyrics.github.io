@@ -13,7 +13,6 @@ destDir = 'db'
 indexFileName = 'index.html'
 sitemapFileName = 'sitemap.xml'
 searchFileName = 'search.html'
-classNames = [ 'l', 'a', 'd', 'c' ] # letter, album, disc, composition
 
 tLayout = open('templates/layout.hbs', 'r').read()
 tHome = open('templates/home.hbs', 'r').read()
@@ -36,7 +35,7 @@ def createSearch():
     return open(searchFileName, 'w')
 
 def printAnchor(target, content, depth):
-    return '<li class="' + classNames[depth] + '"><a href="/' + encodeURL(target) + '/">' + content + '</a></li>'
+    return '<li><a href="/' + encodeURL(target) + '/">' + content + '</a></li>'
 
 def printSitemapURL(target, priority):
     URL = siteURL + '/' + encodeURL(target)
@@ -55,6 +54,8 @@ def printBreadcrumbs(*items):
         base = os.path.join(base, safePath(item))
         output += printAnchor(base, item, depth)
         depth += 1
+        if depth < len(items):
+          output += '<li><span> </span></li>'
     return output
 
 def printLyrics(text):
