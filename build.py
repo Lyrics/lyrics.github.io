@@ -14,10 +14,10 @@ indexFileName = 'index.html'
 sitemapFileName = 'sitemap.xml'
 searchFileName = 'search.html'
 
-tLayout = open('templates/layout.hbs', 'r').read()
-tHome = open('templates/home.hbs', 'r').read()
-tSearch = open('templates/search.hbs', 'r').read()
-t404 = open('templates/404.hbs', 'r').read()
+tLayout = open('src/templates/layout.hbs', 'r').read()
+tHome = open('src/templates/home.hbs', 'r').read()
+tSearch = open('src/templates/search.hbs', 'r').read()
+t404 = open('src/templates/404.hbs', 'r').read()
 
 def safePath(path):
     return path.lower().replace(' ', '-')

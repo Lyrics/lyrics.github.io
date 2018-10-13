@@ -1,5 +1,5 @@
 /*
- * Agenda: micro-reset
+ * Purpose: micro-reset
  *
  */
 *,
@@ -13,7 +13,7 @@
 }
 
 /*
- * Agenda: hide selection highlight from certain elements
+ * Purpose: hide selection highlight from certain elements
  *
  */
 nav {
@@ -68,6 +68,7 @@ p {
 #header {
     background: #333;
     white-space: nowrap;
+    line-height: 1.1rem;
 }
 
 nav a {
@@ -89,11 +90,12 @@ form {
 
 input {
     width: 130px;
-    border-radius: 10px;
+    border-radius: 1rem;
     outline: 0;
-    padding: 4px 10px;
+    padding: .13rem .666rem;
     border: none;
-    margin: 4px;
+    font-size: 1rem;
+    vertical-align: middle;
 }
 
 nav,
@@ -108,7 +110,7 @@ nav,
 
 #breadcrumbs {
     display: block;
-    margin: 20px 0;
+    margin: 1.5rem 0;
     list-style: none;
 }
     #breadcrumbs li {
@@ -147,7 +149,7 @@ nav,
 
 .view {
     color: #222;
-    margin-bottom: 80px;
+    margin-bottom: 72px;
     text-align: center;
 }
 
@@ -175,7 +177,7 @@ nav,
 
 
 /*
- * Agenda: always show the vertical scroll bar on the right
+ * Purpose: always show the vertical scroll bar on the right
  * for shitty browsers so that the X would not twitch
  * every time Y overflow appears or goes away
  *
@@ -186,7 +188,7 @@ body {
 
 
 /*
- * Agenda: align navigation and breadcrumbs to the leftmost vertical line
+ * Purpose: align navigation and breadcrumbs to the leftmost vertical line
  *
  */
 #breadcrumbs a:first-child,
@@ -196,7 +198,7 @@ nav #home {
 
 
 /*
- * Agenda: hide mobile ui controls
+ * Purpose: hide mobile ui controls
  *
  */
 #nav-trigger {
@@ -209,7 +211,7 @@ label {
 
 
 /*
- * Agenda: hide the search field unless JS in on
+ * Purpose: hide the search field unless JS in on
  *
  */
 form {
@@ -262,17 +264,27 @@ form {
     #content {
         width: 100%;
         background: inherit;
-        padding: .5rem 1rem;
+        padding: 0;
     }
+
+        #breadcrumbs {
+            margin: 0;
+            padding: .4rem .7rem;
+        }
 
         #lyrics {
             display: block;
-            padding: .5rem;
+            padding: .7rem;
+            box-shadow: none;
         }
 
-    .view li {
-        margin: 4px 0;
+    .view {
+        padding: .7rem;
     }
+
+        .view li {
+            margin: 4px 0;
+        }
 
 }
 

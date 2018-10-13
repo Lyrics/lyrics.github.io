@@ -9,17 +9,19 @@ build:
 	mkdir -p db/
 	python build.py
 
-pull:
+download:
 	git pull
 	git submodule update --recursive --remote
 
-push:
+add:
 	git add $(HTMLs)
+
+deploy: add
 	git commit -m "update web content"
 	git push
 
-server:
+serve:
 	@echo "Starting local server at http://0.0.0.0:8100"
 	@python -m SimpleHTTPServer 8100
 
-.PHONY: all clean build pull push server
+.PHONY: all clean build download add deploy serve
