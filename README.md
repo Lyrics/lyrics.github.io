@@ -16,16 +16,16 @@ Web front-end to the lyrics database
 
 ## Deploy
 
-    make push
+    make deploy
 
 
 ## Run a local web-server
 
-    make server
+    make serve
 
 ## Quickly update the website
 
-    make pull clean build push
+    make download clean build deploy
 
 ## Credits
 

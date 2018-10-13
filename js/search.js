@@ -45,6 +45,9 @@ var Search = {
         document.getElementById('query').value = this.$route.query.q
         this.fetchData()
     },
+    mounted: function () {
+        this.$el.className = 'search'
+    },
     watch: {
         '$route': 'fetchData'
     },
@@ -65,7 +68,7 @@ var Search = {
             }.bind(this))
         }, debounceTime)
     },
-    template: '<div class="search">' +
+    template: '<div>' +
                 '<div class="loading" v-if="loading">Loading…</div>' +
                 '<div v-if="error" class="error">{{ error }}</div>' +
                 '<div v-if="items" class="content">' +
