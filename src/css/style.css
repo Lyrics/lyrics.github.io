@@ -274,12 +274,13 @@ form {
 
         #lyrics {
             display: block;
-            padding: .7rem;
+            padding: .4rem .7rem;
+            margin: -.4rem -.7rem;
             box-shadow: none;
         }
 
     .view {
-        padding: .7rem;
+        padding: .4rem .7rem;
     }
 
         .view li {
