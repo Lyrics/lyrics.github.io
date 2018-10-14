@@ -1,6 +1,6 @@
 HTMLs = index.html db/ sitemap.xml search.html 404.html
 
-all: clean pull build
+all: clean download build
 
 clean:
 	git rm -rf $(HTMLs) || rm -rf $(HTMLs)
