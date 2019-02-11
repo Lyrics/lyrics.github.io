@@ -1,12 +1,13 @@
 #!/usr/bin/make -f
 
 SASS_OPTS = --style compressed
-HTML_PATHS = index.html db/ sitemap.xml search.html 404.html
+HTML_FILES = index.html db/ sitemap.xml search.html 404.html
+CSS_FILE = s.css
 
 all: clean download build
 
 clean:
-	git rm -rf $(HTML_PATHS) || rm -rf $(HTML_PATHS)
+	git rm -rf $(HTML_FILES) || rm -rf $(HTML_FILES)
 
 build: css
 	mkdir -p db/
@@ -17,7 +18,7 @@ download:
 	git submodule update --recursive --remote
 
 add:
-	git add $(HTML_PATHS)
+	git add $(HTML_FILES) $(CSS_FILE)
 
 deploy: add
 	git commit -m "update web content"
@@ -29,6 +30,6 @@ serve:
 
 css:
 	@which sassc > /dev/null &2> /dev/null && \
-         sassc ${SASS_OPTS} src/css/style.scss s.css
+         sassc ${SASS_OPTS} src/css/style.scss $(CSS_FILE)
 
 .PHONY: all clean build download add deploy serve css
