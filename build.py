@@ -59,9 +59,14 @@ def printBreadcrumbs(*items):
     return output
 
 def printLyrics(text):
-    paragraphed = re.sub('\n\n+', '</p><p>', text)
-    linebroken = re.sub('\n', '<br/>', paragraphed)
-    return '<p>' + linebroken + '</p>'
+    # Wrap metadata into a container
+    regex = re.compile(r'_+\n(.*)$', re.DOTALL)
+    text = regex.sub(r'<div class="metadata">\1</div>', text)
+    # Separate text into paragraphs
+    text = re.sub('\n\n+', '</p><p>', text)
+    # Convert newline characters into linebreaks
+    text = re.sub('\n', '<br/>', text)
+    return '<p>' + text + '</p>'
 
 def printDescriptionList(items):
     return ', '.join(items[:24])
