@@ -143,6 +143,15 @@ nav,
     }
 
 
+/*
+ * Purpose: make metadata look different from the song text
+ *
+ */
+.metadata {
+    opacity: 0.4;
+}
+
+
 .error {
     color: #c00;
 }
