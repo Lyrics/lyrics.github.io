@@ -1,3 +1,5 @@
+$color-navbar-bg: #333;
+
 /*
  * Purpose: micro-reset
  *
@@ -66,21 +68,37 @@ p {
 }
 
 #header {
-    background: #333;
+    background-color: $color-navbar-bg;
     white-space: nowrap;
     line-height: 1.1rem;
 }
 
-nav a {
-    color: #eee;
-    display: inline-block;
-    min-width: 19px;
-    font-size: 0.8em;
-    padding: 12px 9px;
-    text-align: center;
+nav {
+    /* Purpose: add inner shadow to the right side of navbar to hint user that
+                they can hold scroll the alphabet horizontally on mobile */
+    &:after {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 3em;
+        background-image: linear-gradient(to right, transparent, $color-navbar-bg);
 
-    &#home {
-        padding-right: 1rem;
+        // Purpose: make it possible to click on alphabet letters beneath
+        pointer-events: none;
+    }
+
+    a {
+        color: #eee;
+        display: inline-block;
+        min-width: 19px;
+        font-size: 0.8em;
+        padding: 12px 9px;
+        text-align: center;
+
+        &#home {
+            padding-right: 1rem;
+        }
     }
 }
 
@@ -234,6 +252,10 @@ form {
 }
 .js form {
     display: inline-block;
+
+    /* Purpose: make the navbar's inner shadow stay below the search field */
+    position: relative;
+    z-index: 1;
 }
 
 
@@ -247,9 +269,6 @@ form {
         overflow-x: auto;
         overflow-y: hidden;
         margin: -1rem 0;
-        background: -webkit-linear-gradient(left, #333 , #222); /* For Safari 5.1 to 6.0 */
-        background: -moz-linear-gradient(right, #333, #222); /* For Firefox 3.6 to 15 */
-        background: linear-gradient(to right, #333, #222);
     }
 
         nav {
@@ -283,7 +302,7 @@ form {
 
         #breadcrumbs {
             margin: 0;
-            padding: .4rem .7rem;
+            padding: 1.1rem .7rem;
         }
 
         #lyrics {
