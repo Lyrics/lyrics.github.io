@@ -30,6 +30,7 @@ serve:
 
 css:
 	@which sassc > /dev/null &2> /dev/null && \
-         sassc ${SASS_OPTS} src/css/style.scss $(CSS_FILE)
+         sassc ${SASS_OPTS} src/css/style.scss $(CSS_FILE) \
+         || echo -n ''
 
 .PHONY: all clean build download add deploy serve css
