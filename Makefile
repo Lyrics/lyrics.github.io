@@ -21,7 +21,7 @@ add:
 	git add $(HTML_FILES) $(CSS_FILE)
 
 deploy: add
-	git commit -m "update web content"
+	git commit -m "Update web content"
 	git push
 
 serve:
