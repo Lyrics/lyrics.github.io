@@ -282,9 +282,9 @@ form {
             bottom: 0;
             width: $shadow-width;
             height: 2.5em;
-            background: -moz-linear-gradient(deg, transparent 0%, $color-navbar-bg 100%);
-            background: -webkit-linear-gradient(deg, transparent 0%, $color-navbar-bg 100%);
-            background: linear-gradient(90deg, transparent 0%, $color-navbar-bg 100%);
+            background: -moz-linear-gradient(deg, rgba($color-navbar-bg, 0) 0%, $color-navbar-bg 100%);
+            background: -webkit-linear-gradient(deg, rgba($color-navbar-bg, 0) 0%, $color-navbar-bg 100%);
+            background: linear-gradient(90deg, rgba($color-navbar-bg, 0) 0%, $color-navbar-bg 100%);
     
             /* Purpose: make it possible to click on alphabet letters beneath */
             pointer-events: none;
