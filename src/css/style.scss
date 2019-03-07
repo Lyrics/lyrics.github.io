@@ -1,6 +1,9 @@
 $color-navbar-bg: #333;
 $vertical-spacing: 1.1em;
 $shadow-width: 3em;
+$header-height: 1.1rem;
+$website-width: 900px;
+$header-vertical-overflow: 0.5rem;
 
 /*
  * Purpose: hide selection highlight from certain elements
@@ -66,7 +69,7 @@ p {
 #header {
     background-color: $color-navbar-bg;
     white-space: nowrap;
-    line-height: 1.1rem;
+    line-height: $header-height;
 }
 
 nav {
@@ -102,7 +105,7 @@ input {
 nav,
 #content {
     margin: 0 auto;
-    width: 900px;
+    width: $website-width;
 }
 
 #content {
@@ -252,15 +255,15 @@ form {
 @media only screen and (max-width: 920px) {
 
     #header {
-        height: 4.9rem;
+        // height: 4.9rem; // <-- what was this for?
         overflow-x: auto;
         overflow-y: hidden;
-        margin: -1rem 0;
+        margin: -$header-vertical-overflow 0;
     }
 
     nav {
         text-align: left;
-        margin: 1rem 0;
+        margin: $header-vertical-overflow 0;
         margin-right: $shadow-width + 1em;
 
         /* Purpose: add inner shadow to the right side of navbar to hint user that
@@ -286,6 +289,7 @@ form {
             padding: .7rem .5rem;
             margin: .2rem;
             font-weight: bold;
+            min-width: 40px;
 
             &#home {
                 padding: .7rem .5rem;
@@ -318,6 +322,9 @@ form {
 
         // Purpose: hide the paper sheet's shadow on mobile
         box-shadow: none;
+
+        // Purpose: add a bit of spacing to the bottom of the sheet
+        padding-bottom: 2.4rem;
     }
 
     .view {
