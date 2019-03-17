@@ -14,7 +14,7 @@ build: css
 	python build.py
 
 download:
-	git pull
+	git pull || \
 	git submodule update --recursive --remote
 
 add:

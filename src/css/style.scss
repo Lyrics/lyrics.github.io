@@ -4,6 +4,7 @@ $shadow-width: 3em;
 $header-height: 1.1rem;
 $website-width: 900px;
 $header-vertical-overflow: 0.5rem;
+$bottom-lyrics-padding-mobile: 2.4rem;
 
 /*
  * Purpose: hide selection highlight from certain elements
@@ -135,6 +136,7 @@ nav,
 
 #lyrics {
     padding: 20px;
+    margin: 0;
     overflow: auto;
     background: #fff;
     border: solid 1px #f2f2f2;
@@ -169,6 +171,7 @@ nav,
     color: #c00;
 }
 
+
 .view {
     color: #222;
     text-align: center;
@@ -190,6 +193,7 @@ nav,
         }
     }
 }
+
 
 .homepage,
 .not-found {
@@ -323,7 +327,7 @@ form {
         box-shadow: none;
 
         // Purpose: add a bit of spacing to the bottom of the sheet
-        padding-bottom: 2.4rem;
+        padding-bottom: $bottom-lyrics-padding-mobile;
     }
 
     .view {
@@ -339,6 +343,41 @@ form {
         li {
             margin-bottom: 4px;
         }
+    }
+
+    /*
+    * Purpose: Make paper lined to ensure readabilety when lines get wrapped
+    *
+    */
+    #lyrics {
+
+        span {
+            display: block;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+            margin: 0 0 -1px 0;
+
+            br {
+                display: none;
+            }
+
+            &.g {
+                margin-top: 1.4rem;
+                margin-top: calc(1.58rem - 1px);
+            }
+
+            .metadata & {
+                margin: 0;
+                display: inline;
+
+                br {
+                    display: auto;
+                }
+            }
+        }
+    }
+
+    .metadata {
+        margin-top: $bottom-lyrics-padding-mobile;
     }
 
 }

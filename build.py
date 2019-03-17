@@ -63,16 +63,24 @@ def printLyrics(text):
     regex = re.compile(r'_+\n(.*)$', re.DOTALL)
     text = regex.sub(r'<div class="metadata">\1</div>', text)
     # Separate text into paragraphs
-    text = re.sub('\n\n+', '</p><p>', text)
+    text = re.sub('\n\n+', '<span><br/></span><span class="g"><br/></span>', text)
     # Convert newline characters into linebreaks
-    text = re.sub('\n', '<br/>', text)
-    return '<p>' + text + '</p>'
+    text = re.sub('\n', '<span><br/></span>', text)
+    return '<blockquote id="lyrics">' + text + '</blockquote>'
 
 def printDescriptionList(items):
     return ', '.join(items[:24])
 
 def printDescriptionText(text):
     return re.sub(' +', ' ', text.replace('\n', ' / ')[:220]).strip()
+
+def mkdir(path):
+    try:
+        os.mkdir(path)
+    except OSError, e:
+        if e.errno != os.errno.EEXIST:
+            raise
+        pass
 
 # 0. Create the root index file
 main = createHTML('', indexFileName)
@@ -95,7 +103,7 @@ for letter in sorted(os.listdir(srcDir)):
     else:
         safeLetterPath = safePath(os.path.join(destDir, letter))
         # Create db/x/
-        os.mkdir(safeLetterPath)
+        mkdir(safeLetterPath)
         # Create db/x/index.html
         letterPathFile = createHTML(safeLetterPath, indexFileName)
         letters = sorted(os.listdir(letterPath))
@@ -112,7 +120,7 @@ for letter in sorted(os.listdir(srcDir)):
                 # Append artist link to db/x/index.html
                 letterList += printAnchor(safeArtistPath, artist, 1)
                 # Create db/x/artist/
-                os.mkdir(safeArtistPath)
+                mkdir(safeArtistPath)
                 # Create db/x/artist/index.html
                 artistPathFile = createHTML(safeArtistPath, indexFileName)
                 albums = sorted(os.listdir(artistPath))
@@ -129,7 +137,7 @@ for letter in sorted(os.listdir(srcDir)):
                         # Append album link to db/x/artist/index.html
                         albumList += printAnchor(safeAlbumPath, album, 2)
                         # Create db/x/artist/album/
-                        os.mkdir(safeAlbumPath)
+                        mkdir(safeAlbumPath)
                         # Create db/x/artist/album/index.htm
                         albumPathFile = createHTML(safeAlbumPath, indexFileName)
                         songs = sorted(os.listdir(albumPath))
@@ -147,13 +155,13 @@ for letter in sorted(os.listdir(srcDir)):
                                 # Append song link to db/x/artist/album/index.html
                                 songList += printAnchor(safeSongPath, song, 3)
                                 # Create db/x/artist/album/song/
-                                os.mkdir(safeSongPath)
+                                mkdir(safeSongPath)
                                 # Create db/x/artist/album/song/index.html
                                 songPathFile = createHTML(safeSongPath, indexFileName)
                                 # Populate it with lyrics
                                 content = tLayout.replace('{{title}}', artist + ' – ' + song + ' | ' + siteName)
                                 content = content.replace('{{breadcrumbs}}', printBreadcrumbs(letter, artist, album, song))
-                                content = content.replace('{{content}}', '<article id="lyrics">' + printLyrics(lyrics) + '</article>')
+                                content = content.replace('{{content}}', printLyrics(lyrics))
                                 content = content.replace('{{description}}', printDescriptionText(lyrics))
                                 songPathFile.write(content)
                                 sitemapXML += printSitemapURL(safeSongPath, 1)
