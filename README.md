@@ -2,30 +2,7 @@
 
 Web front-end to the lyrics database
 
-## Clone
-
-    git clone git@github.com:Lyrics/lyrics.github.io.git
-    cd lyrics.github.io
-    git submodule update --init --recursive
-
-
-## Build
-
-    make all
-
-
-## Deploy
-
-    make deploy
-
-
-## Run a local web-server
-
-    make serve
-
-## Quickly update the website
-
-    make download clean build deploy
+Generated out of [lyrics](https://github.com/Lyrics/lyrics) using [lyrics-website-generator](https://github.com/Lyrics/lyrics-website-generator)
 
 ## Credits
 
