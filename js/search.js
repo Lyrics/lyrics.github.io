@@ -9,7 +9,7 @@ function formatURL (input) {
     // Represent "&" as "and"
     input = input.replace(/&/g, 'and')
     // Get rid of unwanted characters
-    input = input.replace(/[^\w \/]/g, '')
+    input = input.replace(/[^\wáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœ0-9 \/]/g, '')
     // Trim the string
     input = input.trim()
     // Trim spaces around slashes
