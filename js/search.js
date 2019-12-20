@@ -4,21 +4,7 @@ var debounceTime = 1000
 var dbPrefix = '/db'
 
 function formatURL (input) {
-    // Ensure the string is lowercase
-    input = input.toLowerCase()
-    // Represent "&" as "and"
-    input = input.replace(/&/g, 'and')
-    // Get rid of unwanted characters
-    input = input.replace(/[^\wáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœ0-9 \/]/g, '')
-    // Trim the string
-    input = input.trim()
-    // Trim spaces around slashes
-    input = input.replace(/\s*\/\s*/g, '/')
-    // Replace all spaces with dashes
-    input = input.replace(/\s+/g, '-')
-
     input = encodeURI(input).replace(/\?/g, '%3F')
-
     return dbPrefix + input + '/'
 }
 
