@@ -1,15 +1,25 @@
-'use strict'
-
-
 var baseURL = 'https://api.github.com/repos/Lyrics/lyrics/contents/database/'
 var searchBaseURL = 'https://api.github.com/search/code?q=repo:Lyrics/lyrics path:database/ fork:false '
 var debounceTime = 1000
 var dbPrefix = '/db'
 
-
 function formatURL (input) {
-    if (input)
-        return dbPrefix + encodeURI( input.replace(/ /g, '-').toLowerCase() ).replace(/\?/g, '%3F') + '/'
+    // Ensure the string is lowercase
+    input = input.toLowerCase()
+    // Represent "&" as "and"
+    input = input.replace(/&/g, 'and')
+    // Get rid of unwanted characters
+    input = input.replace(/[^\w \/]/g, '')
+    // Trim the string
+    input = input.trim()
+    // Trim spaces around slashes
+    input = input.replace(/\s*\/\s*/g, '/')
+    // Replace all spaces with dashes
+    input = input.replace(/\s+/g, '-')
+
+    input = encodeURI(input).replace(/\?/g, '%3F')
+
+    return dbPrefix + input + '/'
 }
 
 
@@ -25,12 +35,14 @@ var API = {
                     cb(null, response.body.items)
                 },
                 function (response) {
-                    var reason = response.status == 403 ? 'Search API rate limit exceeded, please try searching again later' : 'Something went wrong'
+                    var reason = response.status == 403 ?
+                        'Search API rate limit exceeded, please try searching again later' :
+                        'Something went wrong'
                     cb(new Error(reason))
                 })
         }
     }
-};
+}
 
 var Search = {
     data: function () {
@@ -96,7 +108,6 @@ var router = new VueRouter({
         }
     ]
 })
-
 
 /* Initiate the framework */
 
