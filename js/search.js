@@ -40,7 +40,9 @@ var Search = {
         }
     },
     created: function () {
-        document.getElementById('query').value = this.$route.query.q
+        setTimeout(function () {
+            document.getElementsByTagName('input')[0].value = this.$route.query.q
+        }.bind(this))
         this.fetchData()
     },
     mounted: function () {
