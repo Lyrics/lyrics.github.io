@@ -10,7 +10,7 @@ add:
 	git add $(HTML_FILES) $(ASSET_FILES)
 
 deploy: add
-	git commit -m "Update web content"
+	git commit -m "Update website content"
 	git push
 
 .PHONY: clean add deploy
