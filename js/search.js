@@ -72,7 +72,7 @@ var Search = {
                 '<div class="loading" v-if="loading">Loading…</div>' +
                 '<div v-if="error" class="error">{{ error }}</div>' +
                 '<div v-if="items" class="content">' +
-                  '<ul id="ls">' +
+                  '<ul id="l">' +
                     '<li v-for="item in items"><a class="t3" :href="formatURL(item.path.substring(8))">{{ item.path.split("/")[2] }} – {{ item.name }}</a></li>' +
                   '</ul>' +
                 '</div>' +
