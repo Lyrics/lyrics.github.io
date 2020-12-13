@@ -1,6 +1,6 @@
 #!/usr/bin/make -f
 
-HTML_FILES = index.html db/ sitemap.xml search.html 404.html
+HTML_FILES = index.html db/ sitemap.xml s.htm 404.html
 ASSET_FILES = s.css js/ 2.svg 3.svg 4.svg favicon.ico
 
 clean:
