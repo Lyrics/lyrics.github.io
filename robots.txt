@@ -3,4 +3,3 @@ Sitemap: https://lyrics.github.io/sitemap.xml
 
 User-Agent: *
 Disallow: /js/
-Disallow: /templates/
