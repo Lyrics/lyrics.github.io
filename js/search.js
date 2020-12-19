@@ -51,7 +51,7 @@ function displayResults(items) {
             var listItemNode = document.createElement('li');
             var listItemAnchorNode = document.createElement('a');
 
-            listItemAnchorNode.className = 't3';
+            listItemAnchorNode.className = 't4';
             listItemAnchorNode.innerText = item.path.split("/")[2] + ' – ' + item.name;
             listItemAnchorNode.href = formatURL(item.path.substring(8));
 
