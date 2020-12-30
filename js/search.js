@@ -43,7 +43,7 @@ function displayResults(items) {
 
     if (items.length > 0) {
         var listNode = document.createElement('ul');
-        listNode.id = 'l';
+        listNode.className = 'l';
 
         for (var i = 0; i < items.length; i++) {
             var item = items[i];
@@ -103,7 +103,7 @@ if (queryString.length > 2) {
                 );
             }
         }
-    }    
+    }
 } else {
     displayError('Query too short');
 }
