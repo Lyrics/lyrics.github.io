@@ -73,7 +73,7 @@ var queryString = getQueryVariable('q');
 
 // Need to wait for the search field to be appended to the DOM tree
 setTimeout(function () {
-    document.getElementsByTagName('input')[0].value = queryString;
+    document.forms[0].firstChild.lastChild.value = queryString;
 });
 
 var appNode = document.getElementById('app');
