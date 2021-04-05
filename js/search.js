@@ -1,9 +1,9 @@
-var searchBaseUrl = 'https://api.github.com/search/code?q=repo:Lyrics/lyrics path:database/ '
-var dBWebsitePrefix = '/db'
+var searchBaseUrl = "https://api.github.com/search/code?q=repo:Lyrics/lyrics path:database/ "
+var dBWebsitePrefix = "/db"
 
 function formatURL (input) {
-    input = encodeURI(input).replace(/\?/g, '%3F')
-    return dBWebsitePrefix + input + '/'
+    input = encodeURI(input).replace(/\?/g, "%3F")
+    return dBWebsitePrefix + input + "/"
 }
 
 function getQueryVariable(variableName) {
@@ -12,15 +12,15 @@ function getQueryVariable(variableName) {
 }
 
 function reset() {
-    appNode.innerHTML = '';
+    appNode.innerHTML = "";
 }
 
 function displayLoading() {
     reset();
 
-    var loadingNode = document.createElement('div');
-    loadingNode.className = 'loading';
-    loadingNode.innerText = 'Loading…';
+    var loadingNode = document.createElement("div");
+    loadingNode.className = "loading";
+    loadingNode.innerText = "Loading…";
 
     appNode.appendChild(loadingNode);
 }
@@ -28,8 +28,8 @@ function displayLoading() {
 function displayError(reason) {
     reset();
 
-    var errorNode = document.createElement('div');
-    errorNode.className = 'error';
+    var errorNode = document.createElement("div");
+    errorNode.className = "error";
     errorNode.innerText = reason;
 
     appNode.appendChild(errorNode);
@@ -38,21 +38,21 @@ function displayError(reason) {
 function displayResults(items) {
     reset();
 
-    var contentNode = document.createElement('div');
-    contentNode.className = 'content';
+    var contentNode = document.createElement("div");
+    contentNode.className = "content";
 
     if (items.length > 0) {
-        var listNode = document.createElement('ul');
-        listNode.className = 'l';
+        var listNode = document.createElement("ul");
+        listNode.className = "l";
 
         for (var i = 0; i < items.length; i++) {
             var item = items[i];
 
-            var listItemNode = document.createElement('li');
-            var listItemAnchorNode = document.createElement('a');
+            var listItemNode = document.createElement("li");
+            var listItemAnchorNode = document.createElement("a");
 
-            listItemAnchorNode.className = 't4';
-            listItemAnchorNode.innerText = item.path.split("/")[2] + ' – ' + item.name;
+            listItemAnchorNode.className = "t4";
+            listItemAnchorNode.innerText = item.path.split("/")[2] + " – " + item.name;
             listItemAnchorNode.href = formatURL(item.path.substring(8));
 
             listItemNode.appendChild(listItemAnchorNode);
@@ -61,22 +61,22 @@ function displayResults(items) {
 
         contentNode.appendChild(listNode);
     } else {
-        var noResultsNode = document.createElement('p');
-        noResultsNode.innerText = 'No results';
+        var noResultsNode = document.createElement("p");
+        noResultsNode.innerText = "No results";
         contentNode.appendChild(noResultsNode);
     }
 
     appNode.appendChild(contentNode);
 }
 
-var queryString = getQueryVariable('q');
+var queryString = getQueryVariable("q");
 
 // Need to wait for the search field to be appended to the DOM tree
 setTimeout(function () {
     document.forms[0].firstChild.lastChild.value = queryString;
 });
 
-var appNode = document.getElementById('app');
+var appNode = document.getElementById("app");
 
 // Put the loading indicator up
 
@@ -98,12 +98,12 @@ if (queryString.length > 2) {
             } else {
                 displayError(
                     xhr.status == 403 ?
-                    'Search API rate limit exceeded, please try again in a bit' :
-                    'Something went wrong'
+                    "Search API rate limit exceeded, please try again in a bit" :
+                    "Something went wrong"
                 );
             }
         }
     }
 } else {
-    displayError('Query too short');
+    displayError("Query too short");
 }
