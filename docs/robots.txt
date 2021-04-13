@@ -1,0 +1,2 @@
+Host: lyrics.github.io
+Sitemap: https://lyrics.github.io/sitemap.xml
